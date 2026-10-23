@@ -123,8 +123,8 @@ damaged cells arrive at the connection's rate, then the meshes rebuild.
 **Replication system.** Built and tested on the default (legacy) replication
 system. Iris is untested; the server logs a warning if it runs with Iris.
 
-**Dedicated servers** are supported: walls simulate damage and structure, and
-spawn no effects or sounds.
+**Dedicated servers.** Walls simulate damage and structure there, and spawn no
+effects or sounds.
 
 **Cheating.** Damage is decided on the server, and shots and movement are
 checked against the server's collider. Detecting memory edits or wallhacks
