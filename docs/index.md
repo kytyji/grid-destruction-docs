@@ -13,6 +13,10 @@ collider, the structural collapse and the debris.
 [Quick start](quick-start.md){ .md-button .md-button--primary }
 [Wire your weapons](integration.md){ .md-button }
 
+<video src="assets/clips/room-collapse.mp4" poster="assets/clips/room-collapse.jpg" autoplay loop muted playsinline style="width:100%;border-radius:6px"></video>
+
+*The showcase level: a glazed wall blows out, then a room loses its walls and the roof comes down.*
+
 ---
 
 ## What you get

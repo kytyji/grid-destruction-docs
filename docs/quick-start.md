@@ -86,6 +86,8 @@ its Details panel:
 !!! success "Worked when"
     A dent appears, then a hole, and debris falls from it.
 
+<video src="../assets/clips/concrete-breach.mp4" poster="../assets/clips/concrete-breach.jpg" autoplay loop muted playsinline style="width:100%;border-radius:6px"></video>
+
 ## 5. Check it in multiplayer
 
 In the Play dropdown set **Number of Players = 2** and **Net Mode = Play As
