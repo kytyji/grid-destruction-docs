@@ -49,7 +49,7 @@ First release, for Unreal Engine 5.7 on Win64.
   and kits, live openings, texture placement controls.
 - Walls in the navmesh, with breaches walkable under a dynamic navmesh.
 - Damage snapshots for pre-damaged levels and save games (beta).
-- A showcase level and a sample pawn with a rifle, a breaching charge and a
-  cutter.
+- A showcase level and a sample pawn with a rifle, a breaching charge, a
+  cutter and a thrown grenade.
 - Blueprint integration with no dependencies (Apply Grid Damage) or through a
   GameplayTag weapon table (Notify Hit By Tag).

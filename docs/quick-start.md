@@ -33,9 +33,10 @@ you set anything up.
 
     | key | action |
     |---|---|
-    | WASD | move |
-    | left mouse button | fire |
-    | **1** / **2** / **3** | rifle / breaching charge / cutter |
+    | WASD, Q / E | move, down / up |
+    | left mouse button | fire; hold for the cutter; throw the grenade |
+    | **1** / **2** / **3** / **4** | rifle / breaching charge / cutter / grenade |
+    | mouse wheel | cycle weapons |
     | **R** | reset every wall |
     | **H** | show or hide the network panel |
 
