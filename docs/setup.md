@@ -233,10 +233,6 @@ the textures it samples (`T_Brick_H`, `T_Wall_Displacement`…). Anything named
 like a normal map is never chosen. Set `FractureHeightParameter` only to pin a
 different one.
 
-**The one thing you may have to set is the channel.** If the height is packed
-beside roughness and occlusion, it is not in red: set `FractureMaskChannel` to
-Green or Blue. The log line names the channel it read.
-
 !!! success "Worked when"
     The log shows one of
 
@@ -261,6 +257,28 @@ cells per repeat are the minimum, one for the joint and one for the brick. If
 the wall has fewer, a `MASKSCALE` line names the `SubdivisionFactor` that fixes
 it. Raise `SubdivisionFactor` first: fine cells exist only where the wall was
 hit, so it costs nothing on an intact wall.
+
+### Packed textures (Megascans, ORM, ORDp)
+
+**You do not need to unpack anything into a black-and-white texture.** Many
+materials, Megascans among them, keep the height in one channel of a packed
+texture beside occlusion and roughness. The bake reads a single channel of any
+texture, so you only tell it which one:
+
+1. Open the wall's material and find the texture sample that feeds the height
+   or displacement (in a Megascans material it is usually named `ORDp`, *Occlusion,
+   Roughness, Displacement*).
+2. Note which output pin of that sample is used for height: **R**, **G**, **B**
+   or **A**.
+3. On the preset, set `FractureMaskChannel` to that channel. **Auto reads red**,
+   which is right only for a dedicated height texture.
+
+For `ORDp` the height is the **Blue** channel. The bake's log line names the
+texture and the channel it read, so one line confirms it:
+
+```
+FractureMask (material height map): 'T_Brick_ORDp' baked, ... channel=Blue ...
+```
 
 ## The wall's material
 
@@ -303,56 +321,95 @@ navmesh the walls are still obstacles, but a hole is never walkable.
     rough. Follow the steps below exactly; expect the workflow to change in a
     later version.
 
-A wall's damage can be captured as a **snapshot** and applied again: to build
+A wall's damage can be saved as a **snapshot** and put back later: to build
 ruined houses in the editor, or to carry a room's state between game sessions.
-A snapshot stores only the damaged cells, so a wall with a few holes is a few
-kilobytes, and the server applies it, so every client receives it as ordinary
-damage.
+
+### What a snapshot is
+
+A snapshot is the struct **`FGridDamageSnapshot`**: a plain list of the wall's
+damaged cells, nothing else. No mesh, no collider, no textures are stored; the
+wall rebuilds all of those from the cells, exactly as it does after a shot.
+
+| field | what it holds |
+|---|---|
+| `GridSizeX`, `GridSizeY`, `SubdivisionFactor` | the grid it was taken from. A snapshot fits only a wall with the same three numbers |
+| `Cells` | one entry per damaged cell: its index, how much was eaten from the front and from the back, and its state (hole, fallen, subdivided) |
+| `Fine` | the same for every damaged fine cell of a subdivided cell |
+| `Lateral` | the side cuts: how far a cap, a jamb or the bore of a hole was eaten |
+| `Version` | the format version, so a later plugin version can still read it |
+
+Depths are stored as a share of the wall's thickness (0–255), not in
+centimetres. Undamaged cells and authored openings are not stored: openings
+come from the wall itself. So a wall with a few holes is a few kilobytes, and
+an intact wall is an empty snapshot.
+
+There are two places to keep one:
+
+- **An asset**, `GridDamagePreset`. It holds one snapshot and is saved in your
+  project like any data asset. A wall points at it through **Initial Damage**.
+  This is for pre-damaged buildings.
+- **Your save game.** The struct is Blueprint-ready, so it goes into your own
+  `SaveGame` object and is written with **Save Game to Slot** like any other
+  variable. This is for carrying damage between sessions.
+
+### How it is applied
+
+The **server** applies a snapshot by writing the stored cells into the wall
+through the same path a shot uses. The wall's mesh and collider are rebuilt
+from them, and clients receive the cells as ordinary replicated damage. So a
+snapshot is never sent as a file: the network only ever sees damaged cells.
+
+- On the server it is **silent**: no debris, no falling pieces, no effects.
+- A client already watching the wall sees the change arrive like damage, with
+  effects. Apply snapshots at the start of play or on a level load, before
+  players look at the wall. Players who join later receive it silently.
+- It **replaces** the wall's current damage; it does not add to it.
+- Pieces that had collapsed come back as holes; nothing falls again.
+- A snapshot that does not fit the wall's grid is refused, with a
+  `DAMAGESNAPSHOT ... refused` line naming both grids.
+
+A wall with an **Initial Damage** asset has it applied when the level starts,
+and the editor viewport shows that damage while you edit.
 
 ### A pre-damaged wall, in the editor
 
-One wall Blueprint plus a small asset per damage state replaces a separate
-"damaged" prop.
+One wall plus a small asset per damage state replaces a separate "damaged" prop.
 
 1. Content Browser → **Add → Miscellaneous → Data Asset → `GridDamagePreset`**.
    Name it, for example `DP_House_WallNorth`.
 2. Select the wall in the level → **Wall | Damage → Initial Damage** = that
    asset.
-3. Play (PIE) and shoot the wall into the shape you want.
-4. Open the console (**~**) and type `GridDestruction.CaptureDamage`. Every
-   wall with an Initial Damage asset writes its current damage into it, and the
-   log says `DAMAGESNAPSHOT [...]: captured N cell(s) ...`.
-5. Stop play and **save the asset** (File → Save All). The wall now starts
+3. Press **Play** and shoot the wall into the shape you want.
+4. Open the console (**~**) and type `GridDestruction.CaptureDamage`. Every wall
+   with an Initial Damage asset writes its current damage into that asset; the
+   Output Log says `DAMAGESNAPSHOT [...]: captured N cell(s) ...`.
+5. Stop play and **save the asset** (File → Save All). The capture changed the
+   asset in memory only; it is kept once it is saved. The wall now starts
    damaged in every game, and the editor viewport shows the damage.
 
-!!! danger "Do not press F8"
-    Ejecting from PIE with F8 to reach the wall's Details panel has frozen the
-    editor. Use the console command above.
-
-Capture again at any time: it replaces the asset's contents. The same asset can
-go on several walls of the same size.
+Capture again at any time: the command replaces the asset's contents. One asset
+can go on several walls of the same grid size, for example a row of identical
+ruined walls.
 
 ### Carrying damage between sessions
 
 In Blueprint, on the server:
 
-- **Saving:** for each `Grid Destructible Wall`, call **Grid Data → Capture
-  Damage Snapshot** and store the result in your `SaveGame` object, in a
-  `Map<Name, GridDamageSnapshot>` keyed by the wall's actor name.
-- **Loading:** after the level is loaded and before players look at it, call
-  **Grid Data → Apply Damage Snapshot** on each wall.
+1. In your `SaveGame` class, add a variable of type
+   `Map<Name, GridDamageSnapshot>`.
+2. **Saving:** for each `Grid Destructible Wall`, call **Grid Data → Capture
+   Damage Snapshot** and add the result to the map under the wall's actor name.
+   Then **Save Game to Slot**.
+3. **Loading:** after the level is loaded and before players look at it,
+   **Load Game from Slot**, and for each wall found in the map call **Grid Data
+   → Apply Damage Snapshot** with its entry. It returns false when the snapshot
+   does not fit the wall.
 
-### What to know
+Actor names are stable for walls placed in the level. Walls you spawn at runtime
+need a key of your own.
 
-- A snapshot fits only a wall with the **same grid**: the same number of cells
-  across and up and the same `SubdivisionFactor`. Otherwise it is refused with a
-  `DAMAGESNAPSHOT ... refused` line naming both grids. Capture again.
-- Applying is **silent on the server**: no debris, no falling pieces. A client
-  already watching the wall sees the change arrive like damage, with effects, so
-  apply snapshots at the start of play or on a level load.
-- Pieces that had collapsed come back as openings; nothing falls again.
-- Authored openings come from the wall, not from the snapshot.
-- `Apply Damage Snapshot` replaces the wall's current damage; it does not add to
-  it.
-- `GridDestruction.ResetWalls`, or **Reset Damage** on a wall, returns walls to
-  the damage they started with: their Initial Damage, else intact.
+### Resetting
+
+`GridDestruction.ResetWalls`, or **Reset Damage** on a wall, returns walls to the
+damage they started with: their Initial Damage, else intact. The sample pawn's
+**R** key does this.

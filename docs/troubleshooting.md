@@ -57,7 +57,6 @@ after BeginPlay.
 | Effect count keeps growing | A system that never finishes; see [Effects → performance](effects.md#performance-rules). |
 | Frame time is bad on walls nobody shot | The debug lattice is on (`bShowDebugCellsInGame` on GridVisual). It is off by default. |
 | Bots do not path through holes | Set the navmesh's Runtime Generation to **Dynamic** ([Setup](setup.md#ai-navigation)). |
-| The editor froze when reaching a wall's Details during play | Do not eject with F8; use the console commands. |
 
 ## Slivers on a hole's rim
 

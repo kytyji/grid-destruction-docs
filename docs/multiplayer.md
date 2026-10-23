@@ -1,7 +1,7 @@
 # Multiplayer
 
 Damage is decided on the server, and every client renders the same cells. This
-page covers testing it, the bandwidth budgets, keeping clients in sync, and Lyra.
+page covers testing it, the bandwidth budgets and keeping clients in sync.
 
 ## Testing in the editor
 
@@ -81,6 +81,8 @@ server to resend the wall, and the resent cells overwrite the wrong ones.
 Add **`GridNetClientComponent`** to your PlayerController, or to the pawn, so a
 client can ask for that resend at once. Without it the wall still heals, at the
 server's next resend after `KeyframeQuietSeconds`. The component needs no code.
+In a GameFeature-based project such as Lyra, add it to the PlayerController
+class with an **Add Components** action.
 
 ### The net panel
 
@@ -127,75 +129,3 @@ spawn no effects or sounds.
 **Cheating.** Damage is decided on the server, and shots and movement are
 checked against the server's collider. Detecting memory edits or wallhacks
 belongs to your game's anti-cheat (EAC, BattlEye), not to this plugin.
-
-## In a Lyra project
-
-The plugin has no Lyra dependency, and nothing below changes Lyra's source: every
-step is a Blueprint edit or a data asset in your project. Install the plugin and
-check the showcase plays first; its GameMode override is the sample's, so Lyra's
-Experience is not involved.
-
-### 1. Walls
-
-Place `GridDestructibleWall`s and apply presets as usual. Lyra's weapons trace on
-`Lyra_TraceChannel_Weapon`, and Lyra's `DefaultEngine.ini` makes the `BlockAll`
-profile block it; the wall's collider uses `BlockAll`. If you give the collider
-your own profile, make it block that channel.
-
-### 2. Impact numbers
-
-Lyra never calls `TakeDamage`, so a weapon hit is passed to the wall through the
-tag table ([Path B](integration.md#path-b-the-tag-table)):
-
-1. A **`GridImpactProfile`** data asset, for example `DA_Impact_Bullet`:
-   `Peak Depth Cm` 3–5, `Radius Cm` 0.
-2. A **`GridImpactProfileSet`**, for example `DA_GridImpacts_Lyra`:
-   `Default Profile` = `DA_Impact_Bullet`. Add rows (`Tag` → `Profile`) per
-   weapon later.
-
-### 3. Hitscan weapons
-
-Content Browser → Settings → **Show Plugin Content**, then open `GA_Weapon_Fire`
-from ShooterCore (the parent of `GA_Weapon_Fire_Pistol` and the others; if the
-children's parent is the C++ class `LyraGameplayAbility_RangedWeapon`, edit each
-child instead). In its Event Graph, find
-**Event On Ranged Weapon Target Data Ready**:
-
-1. Put a **Sequence** after the event: **Then 0** → Lyra's existing damage logic
-   (Ctrl-drag the existing wire, do not delete it); **Then 1** → the nodes below.
-2. **For Loop** from 0 to `Get Data Count From Target Data` (Target Data) − 1.
-3. In the loop body: `Get Hit Result From Target Data` (Target Data, Index) →
-   **Break Hit Result**.
-4. `Hit Actor` → **Get Or Add Grid Bridge** → **Is Valid** (not a wall: skip).
-5. On the Bridge: **Notify Hit By Tag** with
-    - `Profile Set` = `DA_GridImpacts_Lyra`, `Impact Tag` empty (the set's
-      Default Profile) or the weapon's tag;
-    - `Origin` = `Impact Point`;
-    - `Hit Direction` = `Normalize(Trace End − Trace Start)`;
-    - `Hit Instigator` = `Get Avatar Actor From Actor Info`.
-6. Compile and save. Children without their own
-   `On Ranged Weapon Target Data Ready` inherit this; a child that has one
-   overrides it, so add the same nodes there or **Add Call to Parent Function**.
-
-The event also runs on the client (shot prediction). That is fine:
-Notify Hit By Tag does nothing off the server and returns false there.
-
-!!! success "Worked when"
-    A shot in a listen-server PIE session makes a hole in both windows, and
-    Notify Hit By Tag returns true on the server. False on the server: the set
-    has no profile for the tag and no Default Profile. No hole and the node never
-    runs: the shot went through a child ability with its own event (step 6).
-
-### 4. Grenades and projectiles
-
-In the explosion's or projectile's impact Blueprint, on the server: the same
-**Get Or Add Grid Bridge** → **Notify Hit By Tag**, at the blast centre, with a
-profile whose `Radius Cm` is set. One call per blast; the wall finds the cells.
-
-### 5. Fast resync
-
-Lyra's pawn is its own character, so put the component on the controller: open
-the **ShooterCore** GameFeatureData (or your Experience's) → **Actions → Add
-Components** → Actor Class **`LyraPlayerController`**, Component Class
-**`GridNetClientComponent`**, Client ✓ Server ✓. Lyra sets `MaxClientRate` to
-200000, so the default `MaxBytesPerSecond` leaves room for everything else.

@@ -33,7 +33,8 @@ you set anything up.
 
     | key | action |
     |---|---|
-    | WASD, Q / E | move, down / up |
+    | WASD | move |
+    | E or Space / Q or Ctrl | up / down |
     | left mouse button | fire; hold for the cutter; throw the grenade |
     | **1** / **2** / **3** / **4** | rifle / breaching charge / cutter / grenade |
     | mouse wheel | cycle weapons |
@@ -109,8 +110,7 @@ One call where your game already knows "this shot hit that surface": **Apply
 Grid Damage** on the wall's `GridDataComponent`. It works from Blueprint, needs
 no GameplayTags and no GAS, and must run on the server. The
 [Blueprint API](integration.md) page has the details and the tag-table
-alternative; [Multiplayer](multiplayer.md#in-a-lyra-project) has step-by-step
-Lyra wiring.
+alternative; it also has step-by-step wiring for Lyra Starter Game.
 
 ## Where next
 
