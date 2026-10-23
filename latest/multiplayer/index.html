@@ -681,78 +681,6 @@
   
 </li>
       
-        <li class="md-nav__item">
-  <a href="#in-a-lyra-project" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        In a Lyra project
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="In a Lyra project">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#1-walls" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        1. Walls
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#2-impact-numbers" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        2. Impact numbers
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#3-hitscan-weapons" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        3. Hitscan weapons
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#4-grenades-and-projectiles" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        4. Grenades and projectiles
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#5-fast-resync" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        5. Fast resync
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
     </ul>
   
 </nav>
@@ -935,78 +863,6 @@
   
 </li>
       
-        <li class="md-nav__item">
-  <a href="#in-a-lyra-project" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        In a Lyra project
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="In a Lyra project">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#1-walls" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        1. Walls
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#2-impact-numbers" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        2. Impact numbers
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#3-hitscan-weapons" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        3. Hitscan weapons
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#4-grenades-and-projectiles" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        4. Grenades and projectiles
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#5-fast-resync" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        5. Fast resync
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
     </ul>
   
 </nav>
@@ -1026,7 +882,7 @@
 
 <h1 id="multiplayer">Multiplayer<a class="headerlink" href="#multiplayer" title="Permanent link">&para;</a></h1>
 <p>Damage is decided on the server, and every client renders the same cells. This
-page covers testing it, the bandwidth budgets, keeping clients in sync, and Lyra.</p>
+page covers testing it, the bandwidth budgets and keeping clients in sync.</p>
 <h2 id="testing-in-the-editor">Testing in the editor<a class="headerlink" href="#testing-in-the-editor" title="Permanent link">&para;</a></h2>
 <p>Play dropdown → <strong>Number of Players = 2</strong>, <strong>Net Mode = Play As Listen Server</strong>.
 Damage a wall from the server window; the hole appears on the client within
@@ -1128,7 +984,9 @@ server to resend the wall, and the resent cells overwrite the wrong ones.
 <h3 id="fast-resync">Fast resync<a class="headerlink" href="#fast-resync" title="Permanent link">&para;</a></h3>
 <p>Add <strong><code>GridNetClientComponent</code></strong> to your PlayerController, or to the pawn, so a
 client can ask for that resend at once. Without it the wall still heals, at the
-server's next resend after <code>KeyframeQuietSeconds</code>. The component needs no code.</p>
+server's next resend after <code>KeyframeQuietSeconds</code>. The component needs no code.
+In a GameFeature-based project such as Lyra, add it to the PlayerController
+class with an <strong>Add Components</strong> action.</p>
 <h3 id="the-net-panel">The net panel<a class="headerlink" href="#the-net-panel" title="Permanent link">&para;</a></h3>
 <p>With <code>bShowNetDebug</code> on the component (the sample pawn has it on; <strong>H</strong> or
 <code>GridNet.ToggleDebug</code> toggles it), each machine draws a panel: role, ping,
@@ -1166,70 +1024,6 @@ spawn no effects or sounds.</p>
 <p><strong>Cheating.</strong> Damage is decided on the server, and shots and movement are
 checked against the server's collider. Detecting memory edits or wallhacks
 belongs to your game's anti-cheat (EAC, BattlEye), not to this plugin.</p>
-<h2 id="in-a-lyra-project">In a Lyra project<a class="headerlink" href="#in-a-lyra-project" title="Permanent link">&para;</a></h2>
-<p>The plugin has no Lyra dependency, and nothing below changes Lyra's source: every
-step is a Blueprint edit or a data asset in your project. Install the plugin and
-check the showcase plays first; its GameMode override is the sample's, so Lyra's
-Experience is not involved.</p>
-<h3 id="1-walls">1. Walls<a class="headerlink" href="#1-walls" title="Permanent link">&para;</a></h3>
-<p>Place <code>GridDestructibleWall</code>s and apply presets as usual. Lyra's weapons trace on
-<code>Lyra_TraceChannel_Weapon</code>, and Lyra's <code>DefaultEngine.ini</code> makes the <code>BlockAll</code>
-profile block it; the wall's collider uses <code>BlockAll</code>. If you give the collider
-your own profile, make it block that channel.</p>
-<h3 id="2-impact-numbers">2. Impact numbers<a class="headerlink" href="#2-impact-numbers" title="Permanent link">&para;</a></h3>
-<p>Lyra never calls <code>TakeDamage</code>, so a weapon hit is passed to the wall through the
-tag table (<a href="../integration/#path-b-the-tag-table">Path B</a>):</p>
-<ol>
-<li>A <strong><code>GridImpactProfile</code></strong> data asset, for example <code>DA_Impact_Bullet</code>:
-   <code>Peak Depth Cm</code> 3–5, <code>Radius Cm</code> 0.</li>
-<li>A <strong><code>GridImpactProfileSet</code></strong>, for example <code>DA_GridImpacts_Lyra</code>:
-   <code>Default Profile</code> = <code>DA_Impact_Bullet</code>. Add rows (<code>Tag</code> → <code>Profile</code>) per
-   weapon later.</li>
-</ol>
-<h3 id="3-hitscan-weapons">3. Hitscan weapons<a class="headerlink" href="#3-hitscan-weapons" title="Permanent link">&para;</a></h3>
-<p>Content Browser → Settings → <strong>Show Plugin Content</strong>, then open <code>GA_Weapon_Fire</code>
-from ShooterCore (the parent of <code>GA_Weapon_Fire_Pistol</code> and the others; if the
-children's parent is the C++ class <code>LyraGameplayAbility_RangedWeapon</code>, edit each
-child instead). In its Event Graph, find
-<strong>Event On Ranged Weapon Target Data Ready</strong>:</p>
-<ol>
-<li>Put a <strong>Sequence</strong> after the event: <strong>Then 0</strong> → Lyra's existing damage logic
-   (Ctrl-drag the existing wire, do not delete it); <strong>Then 1</strong> → the nodes below.</li>
-<li><strong>For Loop</strong> from 0 to <code>Get Data Count From Target Data</code> (Target Data) − 1.</li>
-<li>In the loop body: <code>Get Hit Result From Target Data</code> (Target Data, Index) →
-   <strong>Break Hit Result</strong>.</li>
-<li><code>Hit Actor</code> → <strong>Get Or Add Grid Bridge</strong> → <strong>Is Valid</strong> (not a wall: skip).</li>
-<li>On the Bridge: <strong>Notify Hit By Tag</strong> with<ul>
-<li><code>Profile Set</code> = <code>DA_GridImpacts_Lyra</code>, <code>Impact Tag</code> empty (the set's
-  Default Profile) or the weapon's tag;</li>
-<li><code>Origin</code> = <code>Impact Point</code>;</li>
-<li><code>Hit Direction</code> = <code>Normalize(Trace End − Trace Start)</code>;</li>
-<li><code>Hit Instigator</code> = <code>Get Avatar Actor From Actor Info</code>.</li>
-</ul>
-</li>
-<li>Compile and save. Children without their own
-   <code>On Ranged Weapon Target Data Ready</code> inherit this; a child that has one
-   overrides it, so add the same nodes there or <strong>Add Call to Parent Function</strong>.</li>
-</ol>
-<p>The event also runs on the client (shot prediction). That is fine:
-Notify Hit By Tag does nothing off the server and returns false there.</p>
-<div class="admonition success">
-<p class="admonition-title">Worked when</p>
-<p>A shot in a listen-server PIE session makes a hole in both windows, and
-Notify Hit By Tag returns true on the server. False on the server: the set
-has no profile for the tag and no Default Profile. No hole and the node never
-runs: the shot went through a child ability with its own event (step 6).</p>
-</div>
-<h3 id="4-grenades-and-projectiles">4. Grenades and projectiles<a class="headerlink" href="#4-grenades-and-projectiles" title="Permanent link">&para;</a></h3>
-<p>In the explosion's or projectile's impact Blueprint, on the server: the same
-<strong>Get Or Add Grid Bridge</strong> → <strong>Notify Hit By Tag</strong>, at the blast centre, with a
-profile whose <code>Radius Cm</code> is set. One call per blast; the wall finds the cells.</p>
-<h3 id="5-fast-resync">5. Fast resync<a class="headerlink" href="#5-fast-resync" title="Permanent link">&para;</a></h3>
-<p>Lyra's pawn is its own character, so put the component on the controller: open
-the <strong>ShooterCore</strong> GameFeatureData (or your Experience's) → <strong>Actions → Add
-Components</strong> → Actor Class <strong><code>LyraPlayerController</code></strong>, Component Class
-<strong><code>GridNetClientComponent</code></strong>, Client ✓ Server ✓. Lyra sets <code>MaxClientRate</code> to
-200000, so the default <code>MaxBytesPerSecond</code> leaves room for everything else.</p>
 
 
 

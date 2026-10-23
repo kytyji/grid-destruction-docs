@@ -601,6 +601,23 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="Where the wall breaks">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#packed-textures-megascans-orm-ordp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Packed textures (Megascans, ORM, ORDp)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -649,6 +666,28 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#what-a-snapshot-is" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What a snapshot is
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#how-it-is-applied" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How it is applied
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#a-pre-damaged-wall-in-the-editor" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -671,10 +710,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#what-to-know" class="md-nav__link">
+  <a href="#resetting" class="md-nav__link">
     <span class="md-ellipsis">
       
-        What to know
+        Resetting
       
     </span>
   </a>
@@ -1078,6 +1117,23 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="Where the wall breaks">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#packed-textures-megascans-orm-ordp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Packed textures (Megascans, ORM, ORDp)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -1126,6 +1182,28 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#what-a-snapshot-is" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What a snapshot is
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#how-it-is-applied" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How it is applied
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#a-pre-damaged-wall-in-the-editor" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1148,10 +1226,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#what-to-know" class="md-nav__link">
+  <a href="#resetting" class="md-nav__link">
     <span class="md-ellipsis">
       
-        What to know
+        Resetting
       
     </span>
   </a>
@@ -1437,9 +1515,6 @@ which it took. A material with no parameters at all is searched by the names of
 the textures it samples (<code>T_Brick_H</code>, <code>T_Wall_Displacement</code>…). Anything named
 like a normal map is never chosen. Set <code>FractureHeightParameter</code> only to pin a
 different one.</p>
-<p><strong>The one thing you may have to set is the channel.</strong> If the height is packed
-beside roughness and occlusion, it is not in red: set <code>FractureMaskChannel</code> to
-Green or Blue. The log line names the channel it read.</p>
 <div class="admonition success">
 <p class="admonition-title">Worked when</p>
 <p>The log shows one of</p>
@@ -1461,6 +1536,24 @@ cells per repeat are the minimum, one for the joint and one for the brick. If
 the wall has fewer, a <code>MASKSCALE</code> line names the <code>SubdivisionFactor</code> that fixes
 it. Raise <code>SubdivisionFactor</code> first: fine cells exist only where the wall was
 hit, so it costs nothing on an intact wall.</p>
+<h3 id="packed-textures-megascans-orm-ordp">Packed textures (Megascans, ORM, ORDp)<a class="headerlink" href="#packed-textures-megascans-orm-ordp" title="Permanent link">&para;</a></h3>
+<p><strong>You do not need to unpack anything into a black-and-white texture.</strong> Many
+materials, Megascans among them, keep the height in one channel of a packed
+texture beside occlusion and roughness. The bake reads a single channel of any
+texture, so you only tell it which one:</p>
+<ol>
+<li>Open the wall's material and find the texture sample that feeds the height
+   or displacement (in a Megascans material it is usually named <code>ORDp</code>, <em>Occlusion,
+   Roughness, Displacement</em>).</li>
+<li>Note which output pin of that sample is used for height: <strong>R</strong>, <strong>G</strong>, <strong>B</strong>
+   or <strong>A</strong>.</li>
+<li>On the preset, set <code>FractureMaskChannel</code> to that channel. <strong>Auto reads red</strong>,
+   which is right only for a dedicated height texture.</li>
+</ol>
+<p>For <code>ORDp</code> the height is the <strong>Blue</strong> channel. The bake's log line names the
+texture and the channel it read, so one line confirms it:</p>
+<div class="highlight"><pre><span></span><code>FractureMask (material height map): 'T_Brick_ORDp' baked, ... channel=Blue ...
+</code></pre></div>
 <h2 id="the-walls-material">The wall's material<a class="headerlink" href="#the-walls-material" title="Permanent link">&para;</a></h2>
 <p>The visible surface is a procedural mesh, and its material is the preset's
 <code>WallMaterial</code>, or the first slot of <code>WallMesh</code> when that is unset.</p>
@@ -1493,57 +1586,109 @@ navmesh the walls are still obstacles, but a hole is never walkable.</p>
 rough. Follow the steps below exactly; expect the workflow to change in a
 later version.</p>
 </div>
-<p>A wall's damage can be captured as a <strong>snapshot</strong> and applied again: to build
-ruined houses in the editor, or to carry a room's state between game sessions.
-A snapshot stores only the damaged cells, so a wall with a few holes is a few
-kilobytes, and the server applies it, so every client receives it as ordinary
-damage.</p>
+<p>A wall's damage can be saved as a <strong>snapshot</strong> and put back later: to build
+ruined houses in the editor, or to carry a room's state between game sessions.</p>
+<h3 id="what-a-snapshot-is">What a snapshot is<a class="headerlink" href="#what-a-snapshot-is" title="Permanent link">&para;</a></h3>
+<p>A snapshot is the struct <strong><code>FGridDamageSnapshot</code></strong>: a plain list of the wall's
+damaged cells, nothing else. No mesh, no collider, no textures are stored; the
+wall rebuilds all of those from the cells, exactly as it does after a shot.</p>
+<table>
+<thead>
+<tr>
+<th>field</th>
+<th>what it holds</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>GridSizeX</code>, <code>GridSizeY</code>, <code>SubdivisionFactor</code></td>
+<td>the grid it was taken from. A snapshot fits only a wall with the same three numbers</td>
+</tr>
+<tr>
+<td><code>Cells</code></td>
+<td>one entry per damaged cell: its index, how much was eaten from the front and from the back, and its state (hole, fallen, subdivided)</td>
+</tr>
+<tr>
+<td><code>Fine</code></td>
+<td>the same for every damaged fine cell of a subdivided cell</td>
+</tr>
+<tr>
+<td><code>Lateral</code></td>
+<td>the side cuts: how far a cap, a jamb or the bore of a hole was eaten</td>
+</tr>
+<tr>
+<td><code>Version</code></td>
+<td>the format version, so a later plugin version can still read it</td>
+</tr>
+</tbody>
+</table>
+<p>Depths are stored as a share of the wall's thickness (0–255), not in
+centimetres. Undamaged cells and authored openings are not stored: openings
+come from the wall itself. So a wall with a few holes is a few kilobytes, and
+an intact wall is an empty snapshot.</p>
+<p>There are two places to keep one:</p>
+<ul>
+<li><strong>An asset</strong>, <code>GridDamagePreset</code>. It holds one snapshot and is saved in your
+  project like any data asset. A wall points at it through <strong>Initial Damage</strong>.
+  This is for pre-damaged buildings.</li>
+<li><strong>Your save game.</strong> The struct is Blueprint-ready, so it goes into your own
+  <code>SaveGame</code> object and is written with <strong>Save Game to Slot</strong> like any other
+  variable. This is for carrying damage between sessions.</li>
+</ul>
+<h3 id="how-it-is-applied">How it is applied<a class="headerlink" href="#how-it-is-applied" title="Permanent link">&para;</a></h3>
+<p>The <strong>server</strong> applies a snapshot by writing the stored cells into the wall
+through the same path a shot uses. The wall's mesh and collider are rebuilt
+from them, and clients receive the cells as ordinary replicated damage. So a
+snapshot is never sent as a file: the network only ever sees damaged cells.</p>
+<ul>
+<li>On the server it is <strong>silent</strong>: no debris, no falling pieces, no effects.</li>
+<li>A client already watching the wall sees the change arrive like damage, with
+  effects. Apply snapshots at the start of play or on a level load, before
+  players look at the wall. Players who join later receive it silently.</li>
+<li>It <strong>replaces</strong> the wall's current damage; it does not add to it.</li>
+<li>Pieces that had collapsed come back as holes; nothing falls again.</li>
+<li>A snapshot that does not fit the wall's grid is refused, with a
+  <code>DAMAGESNAPSHOT ... refused</code> line naming both grids.</li>
+</ul>
+<p>A wall with an <strong>Initial Damage</strong> asset has it applied when the level starts,
+and the editor viewport shows that damage while you edit.</p>
 <h3 id="a-pre-damaged-wall-in-the-editor">A pre-damaged wall, in the editor<a class="headerlink" href="#a-pre-damaged-wall-in-the-editor" title="Permanent link">&para;</a></h3>
-<p>One wall Blueprint plus a small asset per damage state replaces a separate
-"damaged" prop.</p>
+<p>One wall plus a small asset per damage state replaces a separate "damaged" prop.</p>
 <ol>
 <li>Content Browser → <strong>Add → Miscellaneous → Data Asset → <code>GridDamagePreset</code></strong>.
    Name it, for example <code>DP_House_WallNorth</code>.</li>
 <li>Select the wall in the level → <strong>Wall | Damage → Initial Damage</strong> = that
    asset.</li>
-<li>Play (PIE) and shoot the wall into the shape you want.</li>
-<li>Open the console (<strong>~</strong>) and type <code>GridDestruction.CaptureDamage</code>. Every
-   wall with an Initial Damage asset writes its current damage into it, and the
-   log says <code>DAMAGESNAPSHOT [...]: captured N cell(s) ...</code>.</li>
-<li>Stop play and <strong>save the asset</strong> (File → Save All). The wall now starts
+<li>Press <strong>Play</strong> and shoot the wall into the shape you want.</li>
+<li>Open the console (<strong>~</strong>) and type <code>GridDestruction.CaptureDamage</code>. Every wall
+   with an Initial Damage asset writes its current damage into that asset; the
+   Output Log says <code>DAMAGESNAPSHOT [...]: captured N cell(s) ...</code>.</li>
+<li>Stop play and <strong>save the asset</strong> (File → Save All). The capture changed the
+   asset in memory only; it is kept once it is saved. The wall now starts
    damaged in every game, and the editor viewport shows the damage.</li>
 </ol>
-<div class="admonition danger">
-<p class="admonition-title">Do not press F8</p>
-<p>Ejecting from PIE with F8 to reach the wall's Details panel has frozen the
-editor. Use the console command above.</p>
-</div>
-<p>Capture again at any time: it replaces the asset's contents. The same asset can
-go on several walls of the same size.</p>
+<p>Capture again at any time: the command replaces the asset's contents. One asset
+can go on several walls of the same grid size, for example a row of identical
+ruined walls.</p>
 <h3 id="carrying-damage-between-sessions">Carrying damage between sessions<a class="headerlink" href="#carrying-damage-between-sessions" title="Permanent link">&para;</a></h3>
 <p>In Blueprint, on the server:</p>
-<ul>
+<ol>
+<li>In your <code>SaveGame</code> class, add a variable of type
+   <code>Map&lt;Name, GridDamageSnapshot&gt;</code>.</li>
 <li><strong>Saving:</strong> for each <code>Grid Destructible Wall</code>, call <strong>Grid Data → Capture
-  Damage Snapshot</strong> and store the result in your <code>SaveGame</code> object, in a
-  <code>Map&lt;Name, GridDamageSnapshot&gt;</code> keyed by the wall's actor name.</li>
-<li><strong>Loading:</strong> after the level is loaded and before players look at it, call
-  <strong>Grid Data → Apply Damage Snapshot</strong> on each wall.</li>
-</ul>
-<h3 id="what-to-know">What to know<a class="headerlink" href="#what-to-know" title="Permanent link">&para;</a></h3>
-<ul>
-<li>A snapshot fits only a wall with the <strong>same grid</strong>: the same number of cells
-  across and up and the same <code>SubdivisionFactor</code>. Otherwise it is refused with a
-  <code>DAMAGESNAPSHOT ... refused</code> line naming both grids. Capture again.</li>
-<li>Applying is <strong>silent on the server</strong>: no debris, no falling pieces. A client
-  already watching the wall sees the change arrive like damage, with effects, so
-  apply snapshots at the start of play or on a level load.</li>
-<li>Pieces that had collapsed come back as openings; nothing falls again.</li>
-<li>Authored openings come from the wall, not from the snapshot.</li>
-<li><code>Apply Damage Snapshot</code> replaces the wall's current damage; it does not add to
-  it.</li>
-<li><code>GridDestruction.ResetWalls</code>, or <strong>Reset Damage</strong> on a wall, returns walls to
-  the damage they started with: their Initial Damage, else intact.</li>
-</ul>
+   Damage Snapshot</strong> and add the result to the map under the wall's actor name.
+   Then <strong>Save Game to Slot</strong>.</li>
+<li><strong>Loading:</strong> after the level is loaded and before players look at it,
+   <strong>Load Game from Slot</strong>, and for each wall found in the map call <strong>Grid Data
+   → Apply Damage Snapshot</strong> with its entry. It returns false when the snapshot
+   does not fit the wall.</li>
+</ol>
+<p>Actor names are stable for walls placed in the level. Walls you spawn at runtime
+need a key of your own.</p>
+<h3 id="resetting">Resetting<a class="headerlink" href="#resetting" title="Permanent link">&para;</a></h3>
+<p><code>GridDestruction.ResetWalls</code>, or <strong>Reset Damage</strong> on a wall, returns walls to the
+damage they started with: their Initial Damage, else intact. The sample pawn's
+<strong>R</strong> key does this.</p>
 
 
 
