@@ -124,7 +124,11 @@ damaged cells arrive at the connection's rate, then the meshes rebuild.
 system. Iris is untested; the server logs a warning if it runs with Iris.
 
 **Dedicated servers.** Walls simulate damage and structure there, and spawn no
-effects or sounds.
+effects or sounds. A dedicated server cannot read textures, so a wall's break
+pattern (the fracture mask or its material's height map) is baked when you save
+the level, and the server uses that. **Save the level after changing a wall's
+material, mask or size.** A wall spawned at runtime on a dedicated server has no
+saved pattern: it breaks by the default pattern, with a warning in the log.
 
 **Cheating.** Damage is decided on the server, and shots and movement are
 checked against the server's collider. Detecting memory edits or wallhacks
