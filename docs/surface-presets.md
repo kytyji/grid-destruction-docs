@@ -1,7 +1,12 @@
 # Surface presets
 
-Every number a wall needs to fail like the thing it is made of, for all six
-surface types, with what each one changes and the order to tune them in.
+What every preset field does, and the order to tune them in.
+
+**The shipped presets already carry these values.** `GP_Concrete`, `GP_Brick`
+and the others in `/GridDestruction/Presets/` are ready to use, so you do not
+type anything from this page to get a working wall. The value tables are folded
+away: open them when you make a preset of your own, want to compare materials,
+or need to get back to the shipped numbers after experimenting.
 
 Three assets carry them, and the split matters:
 
@@ -53,23 +58,25 @@ prints each field it changed as `old -> new`.
 
 `DA_GridSurfaceMaterials` → `Configs` → one row per surface type.
 
-| | Concrete | Brick | Stone | Wood | Metal | Glass |
-|---|---|---|---|---|---|---|
-| `DamageResistance` | 1.0 | 0.9 | 1.4 | 0.6 | 2.0 | 0.3 |
-| `FalloffScaleU` | 1.0 | 1.6 | 0.9 | 3.0 | 0.8 | 1.2 |
-| `FalloffScaleV` | 1.0 | 0.7 | 0.9 | 1.0 | 0.8 | 1.2 |
-| `SmoothingAngleDeg` | 30 | 25 | 20 | 35 | 60 | 15 |
-| `RicochetAngleDeg` | 15 | 15 | 18 | 10 | 30 | 0 |
-| `GrazingDamageScale` | 0.35 | 0.35 | 0.30 | 0.50 | 0.10 | 1.0 |
-| `EdgeProfile.Style` | Rounded | Square | Rounded | Shard | Rounded | Shard |
-| `EdgeProfile.AmplitudeU` | 0.30 | 0.30 | 0.25 | 0.30 | 0.08 | 0.35 |
-| `EdgeProfile.AmplitudeV` | 0.30 | 0.04 | 0.25 | 0.06 | 0.08 | 0.35 |
-| `EdgeProfile.QuantiseU` | 0 | 0.15 | 0 | 0 | 0 | 0 |
-| `EdgeProfile.QuantiseV` | 0 | 0 | 0 | 0 | 0 | 0 |
-| `EdgeProfile.DepthNoise` | 0.25 | 0.15 | 0.30 | 0.20 | 0.05 | 0.10 |
-| `bBrittle` | false | false | false | false | false | true |
-| `BrittleBreakFraction` | 0.35 | 0.35 | 0.35 | 0.35 | 0.35 | 0.35 |
-| `BrittleShardSizeCm` | 12 | 12 | 12 | 12 | 12 | 12 |
+??? info "Shipped values: open the table"
+
+    | | Concrete | Brick | Stone | Wood | Metal | Glass |
+    |---|---|---|---|---|---|---|
+    | `DamageResistance` | 1.0 | 0.9 | 1.4 | 0.6 | 2.0 | 0.3 |
+    | `FalloffScaleU` | 1.0 | 1.6 | 0.9 | 3.0 | 0.8 | 1.2 |
+    | `FalloffScaleV` | 1.0 | 0.7 | 0.9 | 1.0 | 0.8 | 1.2 |
+    | `SmoothingAngleDeg` | 30 | 25 | 20 | 35 | 60 | 15 |
+    | `RicochetAngleDeg` | 15 | 15 | 18 | 10 | 30 | 0 |
+    | `GrazingDamageScale` | 0.35 | 0.35 | 0.30 | 0.50 | 0.10 | 1.0 |
+    | `EdgeProfile.Style` | Rounded | Square | Rounded | Shard | Rounded | Shard |
+    | `EdgeProfile.AmplitudeU` | 0.30 | 0.30 | 0.25 | 0.30 | 0.08 | 0.35 |
+    | `EdgeProfile.AmplitudeV` | 0.30 | 0.04 | 0.25 | 0.06 | 0.08 | 0.35 |
+    | `EdgeProfile.QuantiseU` | 0 | 0.15 | 0 | 0 | 0 | 0 |
+    | `EdgeProfile.QuantiseV` | 0 | 0 | 0 | 0 | 0 | 0 |
+    | `EdgeProfile.DepthNoise` | 0.25 | 0.15 | 0.30 | 0.20 | 0.05 | 0.10 |
+    | `bBrittle` | false | false | false | false | false | true |
+    | `BrittleBreakFraction` | 0.35 | 0.35 | 0.35 | 0.35 | 0.35 | 0.35 |
+    | `BrittleShardSizeCm` | 12 | 12 | 12 | 12 | 12 | 12 |
 
 ### Why each column looks the way it does
 
@@ -155,33 +162,35 @@ that differs between a red brick and a grey one lives on the preset.
 
 ## Table 2: the wall preset
 
-| | Concrete | Brick | Stone | Wood | Metal | Glass |
-|---|---|---|---|---|---|---|
-| `ThicknessCm` | 25 | 20 | 40 | 8 | 4 | 2 |
-| `CellDensity` | 4 | 4 | 3 | 5 | 5 | 6 |
-| `SubdivisionFactor` | 2 | 4 | 2 | 2 | 1 | 1 |
-| `StructuralThreshold` | 0.25 | 0.30 | 0.20 | 0.40 | 0.15 | 0.60 |
-| `MaxOverhangCm` | 200 | 150 | 120 | 150 | 300 | 60 |
-| `MaxDestructionPercent` | 1.0 | 1.0 | 1.0 | 1.0 | 1.0 | 1.0 |
-| `MinSpallRadiusCells` | 1.5 | 1.4 | 1.2 | 1.6 | 0.8 | 1.5 |
-| `ExitSpallDepthScale` | 0.35 | 0.40 | 0.30 | 0.45 | 0.15 | 0.40 |
-| `ExitSpallRadiusScale` | 1.6 | 1.7 | 1.5 | 1.8 | 1.2 | 1.2 |
-| `ObliquityStretch` | 1.0 | 1.2 | 0.8 | 1.2 | 0.6 | 0.4 |
-| `ObliquitySkew` | 1.0 | 1.2 | 0.8 | 1.2 | 0.6 | 0.4 |
-| `BreachFalloffCells` | 3.0 | 2.5 | 3.5 | 2.5 | 1.5 | 4.0 |
-| `FractureNoise` | 0.40 | 0.30 | 0.45 | 0.30 | 0.10 | 0.20 |
-| `FractureNoiseScaleCm` | 20 | 20 | 25 | 10 | 15 | 15 |
-| `FractureMaskContrast` | 2.0 | 2.0 | 2.0 | 2.0 | 2.0 | 2.0 |
-| `bDeriveFractureMaskFromMaterial` | true | true | true | true | false | false |
-| `SpikeSuppressionChance` | 0.7 | 0.7 | 0.7 | 0.7 | 0.7 | 0.7 |
-| `MinSupportingNeighbours` | 2 | 2 | 2 | 2 | 2 | 2 |
-| `HoleRimThicknessFraction` | 0.10 | 0.12 | 0.10 | 0.18 | 0.30 | 0.45 |
-| `EdgeCrumbleScale` | 1.0 | 1.0 | 1.0 | 0.8 | 0.25 | 0.9 |
-| `RevealCrushScale` | 1.5 | 1.8 | 1.3 | 2.0 | 1.0 | 2.5 |
-| `CornerChipScale` | 4 | 4 | 4 | 4 | 0 | 0 |
-| `EdgeFirst` | 1 | 1 | 1 | 1 | 0 | 0 |
-| `DentStepCm` | 3 | 4 | 4 | 2 | 0 | 0 |
-| `CapEdges` | per placement | | | | | |
+??? info "Shipped values: open the table"
+
+    | | Concrete | Brick | Stone | Wood | Metal | Glass |
+    |---|---|---|---|---|---|---|
+    | `ThicknessCm` | 25 | 20 | 40 | 8 | 4 | 2 |
+    | `CellDensity` | 4 | 4 | 3 | 5 | 5 | 6 |
+    | `SubdivisionFactor` | 2 | 4 | 2 | 2 | 1 | 1 |
+    | `StructuralThreshold` | 0.25 | 0.30 | 0.20 | 0.40 | 0.15 | 0.60 |
+    | `MaxOverhangCm` | 200 | 150 | 120 | 150 | 300 | 60 |
+    | `MaxDestructionPercent` | 1.0 | 1.0 | 1.0 | 1.0 | 1.0 | 1.0 |
+    | `MinSpallRadiusCells` | 1.5 | 1.4 | 1.2 | 1.6 | 0.8 | 1.5 |
+    | `ExitSpallDepthScale` | 0.35 | 0.40 | 0.30 | 0.45 | 0.15 | 0.40 |
+    | `ExitSpallRadiusScale` | 1.6 | 1.7 | 1.5 | 1.8 | 1.2 | 1.2 |
+    | `ObliquityStretch` | 1.0 | 1.2 | 0.8 | 1.2 | 0.6 | 0.4 |
+    | `ObliquitySkew` | 1.0 | 1.2 | 0.8 | 1.2 | 0.6 | 0.4 |
+    | `BreachFalloffCells` | 3.0 | 2.5 | 3.5 | 2.5 | 1.5 | 4.0 |
+    | `FractureNoise` | 0.40 | 0.30 | 0.45 | 0.30 | 0.10 | 0.20 |
+    | `FractureNoiseScaleCm` | 20 | 20 | 25 | 10 | 15 | 15 |
+    | `FractureMaskContrast` | 2.0 | 2.0 | 2.0 | 2.0 | 2.0 | 2.0 |
+    | `bDeriveFractureMaskFromMaterial` | true | true | true | true | false | false |
+    | `SpikeSuppressionChance` | 0.7 | 0.7 | 0.7 | 0.7 | 0.7 | 0.7 |
+    | `MinSupportingNeighbours` | 2 | 2 | 2 | 2 | 2 | 2 |
+    | `HoleRimThicknessFraction` | 0.10 | 0.12 | 0.10 | 0.18 | 0.30 | 0.45 |
+    | `EdgeCrumbleScale` | 1.0 | 1.0 | 1.0 | 0.8 | 0.25 | 0.9 |
+    | `RevealCrushScale` | 1.5 | 1.8 | 1.3 | 2.0 | 1.0 | 2.5 |
+    | `CornerChipScale` | 4 | 4 | 4 | 4 | 0 | 0 |
+    | `EdgeFirst` | 1 | 1 | 1 | 1 | 0 | 0 |
+    | `DentStepCm` | 3 | 4 | 4 | 2 | 0 | 0 |
+    | `CapEdges` | per placement | | | | | |
 
 ### Size and structure
 
@@ -329,11 +338,13 @@ a capped edge looks like a knife edge, raise `HoleRimThicknessFraction`.
 
 On the wall's **GridCollapseVisual** component, not on the preset.
 
-| | Concrete | Brick | Stone | Wood | Metal | Glass |
-|---|---|---|---|---|---|---|
-| `DebrisMassScale` | 1.0 | 0.9 | 1.3 | 0.35 | 0.8 | 0.5 |
-| `ChunkLifetimeSeconds` | 1.6 | 1.6 | 2.0 | 1.4 | 1.4 | 1.0 |
-| `KeepSettledAboveSizeCm` | 0 | 0 | 0 | 0 | 0 | 0 |
+??? info "Shipped values: open the table"
+
+    | | Concrete | Brick | Stone | Wood | Metal | Glass |
+    |---|---|---|---|---|---|---|
+    | `DebrisMassScale` | 1.0 | 0.9 | 1.3 | 0.35 | 0.8 | 0.5 |
+    | `ChunkLifetimeSeconds` | 1.6 | 1.6 | 2.0 | 1.4 | 1.4 | 1.0 |
+    | `KeepSettledAboveSizeCm` | 0 | 0 | 0 | 0 | 0 | 0 |
 
 - **Mass comes from the physical material first.** Set `PhysicalSurface` on the
   preset; `DebrisMassScale` is taste on top. Leave it at 1.0 until the physical
