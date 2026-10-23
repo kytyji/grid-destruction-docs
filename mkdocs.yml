@@ -1,0 +1,76 @@
+site_name: Grid Destruction
+site_description: Server-authoritative destructible walls for Unreal Engine 5 multiplayer.
+site_author: kytyji
+site_url: https://kytyji.github.io/grid-destruction-docs/
+repo_url: https://github.com/kytyji/grid-destruction-docs
+repo_name: grid-destruction-docs
+edit_uri: ""
+copyright: Grid Destruction &copy; 2026 Anna Gonezhuk &middot; developed by kytyji
+
+theme:
+  name: material
+  features:
+    - navigation.sections
+    - navigation.top
+    - navigation.footer
+    - navigation.indexes
+    - content.code.copy
+    - search.highlight
+    - toc.follow
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: blue grey
+      accent: deep orange
+      toggle:
+        icon: material/weather-night
+        name: Dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: blue grey
+      accent: deep orange
+      toggle:
+        icon: material/weather-sunny
+        name: Light mode
+
+extra:
+  version:
+    provider: mike
+    default: latest
+
+markdown_extensions:
+  - admonition
+  - attr_list
+  - def_list
+  - tables
+  - toc:
+      permalink: true
+  - pymdownx.details
+  - pymdownx.superfences
+  - pymdownx.highlight
+  - pymdownx.inlinehilite
+  - pymdownx.tasklist:
+      custom_checkbox: true
+
+nav:
+  - Home: index.md
+  - Quick start: quick-start.md
+  - Guides:
+      - Setup: setup.md
+      - Surface presets: surface-presets.md
+      - Damage material: damage-material.md
+      - Effects and sounds: effects.md
+  - Blueprint API: integration.md
+  - Multiplayer: multiplayer.md
+  - Troubleshooting: troubleshooting.md
+  - Changelog: changelog.md
+
+validation:
+  nav:
+    omitted_files: warn
+    not_found: warn
+  links:
+    not_found: warn
+    anchors: warn
+    absolute_links: warn
+    unrecognized_links: warn

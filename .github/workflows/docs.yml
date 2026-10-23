@@ -1,0 +1,65 @@
+# Builds the site on every push and pull request, and publishes it to the
+# gh-pages branch with mike:
+#   push to main      -> version "latest" (the default the site root redirects to)
+#   tag vX.Y.Z        -> version "X.Y", kept as it is when later versions ship
+#   Run workflow      -> any version by hand, e.g. "1.0" before its tag exists
+name: docs
+
+on:
+  push:
+    branches: [main]
+    tags: ["v*"]
+  pull_request:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: "Version to publish, e.g. 1.0"
+        required: true
+
+permissions:
+  contents: write
+
+concurrency:
+  group: gh-pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - run: pip install -r requirements.txt
+
+      - name: Build (every link must resolve)
+        run: mkdocs build --strict
+
+      - name: Pick the version to publish
+        if: github.event_name != 'pull_request'
+        id: ver
+        run: |
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            echo "name=${{ inputs.version }}" >> "$GITHUB_OUTPUT"
+          elif [ "${{ github.ref_type }}" = "tag" ]; then
+            # v1.0.3 -> 1.0: patch releases update their minor version's docs.
+            v="${GITHUB_REF_NAME#v}"
+            echo "name=${v%.*}" >> "$GITHUB_OUTPUT"
+          else
+            echo "name=latest" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Publish with mike
+        if: github.event_name != 'pull_request'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git fetch origin gh-pages --depth=1 || true
+          mike deploy --push "${{ steps.ver.outputs.name }}"
+          mike set-default --push latest
