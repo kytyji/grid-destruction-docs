@@ -1,0 +1,1119 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Server-authoritative destructible walls for Unreal Engine 5 multiplayer.">
+      
+      
+        <meta name="author" content="kytyji">
+      
+      
+        <link rel="canonical" href="https://kytyji.github.io/grid-destruction-docs/latest/troubleshooting/">
+      
+      
+        <link rel="prev" href="../multiplayer/">
+      
+      
+        <link rel="next" href="../changelog/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>Troubleshooting - Grid Destruction</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="blue-grey" data-md-color-accent="deep-orange">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#troubleshooting" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <div data-md-color-scheme="default" data-md-component="outdated" hidden>
+        
+      </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="Grid Destruction" class="md-header__button md-logo" aria-label="Grid Destruction" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Grid Destruction
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Troubleshooting
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="blue-grey" data-md-color-accent="deep-orange"  aria-label="Dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="blue-grey" data-md-color-accent="deep-orange"  aria-label="Light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/kytyji/grid-destruction-docs" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    grid-destruction-docs
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Grid Destruction" class="md-nav__button md-logo" aria-label="Grid Destruction" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Grid Destruction
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/kytyji/grid-destruction-docs" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    grid-destruction-docs
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../quick-start/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Quick start
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Guides
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Guides
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../setup/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Setup
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../surface-presets/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Surface presets
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../damage-material/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Damage material
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../effects/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Effects and sounds
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../integration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Blueprint API
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../multiplayer/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Multiplayer
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Troubleshooting
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Troubleshooting
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#console-commands" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Console commands
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#what-you-see-what-to-check" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What you see → what to check
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#slivers-on-a-holes-rim" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Slivers on a hole's rim
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#reporting-a-problem" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Reporting a problem
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../changelog/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Changelog
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#console-commands" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Console commands
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#what-you-see-what-to-check" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What you see → what to check
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#slivers-on-a-holes-rim" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Slivers on a hole's rim
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#reporting-a-problem" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Reporting a problem
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="troubleshooting">Troubleshooting<a class="headerlink" href="#troubleshooting" title="Permanent link">&para;</a></h1>
+<p>Most problems in a destruction setup are silent: they look like "nothing
+happened". The plugin logs a reason for almost every refusal, so start with the
+Output Log and the console commands below.</p>
+<h2 id="console-commands">Console commands<a class="headerlink" href="#console-commands" title="Permanent link">&para;</a></h2>
+<p>These need a running PIE session or game: the geometry and the grid exist only
+after BeginPlay.</p>
+<table>
+<thead>
+<tr>
+<th>command</th>
+<th>what it does</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>GridDestruction.HashCells</code></td>
+<td>hashes every wall on every live world and prints a MATCH / MISMATCH verdict, naming the first differing cell</td>
+</tr>
+<tr>
+<td><code>GridDestruction.CheckPresets</code></td>
+<td>one line per wall: <code>MATCH</code> or <code>STALE</code> against its preset, plus walls over the late-join size</td>
+</tr>
+<tr>
+<td><code>GridDestruction.ShowSeams</code></td>
+<td>draws which walls are joined (green edges, yellow links) and logs each <code>GRIDSEAM</code></td>
+</tr>
+<tr>
+<td><code>GridDestruction.RebuildWalls</code></td>
+<td>rebuilds every wall's visible mesh now</td>
+</tr>
+<tr>
+<td><code>GridDestruction.DumpGeometry</code></td>
+<td>audits winding, normals, counts and bounds on every wall</td>
+</tr>
+<tr>
+<td><code>GridDestruction.ProfileWall</code></td>
+<td>per-wall mesh statistics, including <code>degen=</code> (should be 0) and <code>dropped=</code></td>
+</tr>
+<tr>
+<td><code>GridDestruction.ResetWalls</code></td>
+<td>every wall back to the damage it started with; on the server or standalone. The sample pawn's <strong>R</strong> key asks the server for you</td>
+</tr>
+<tr>
+<td><code>GridDestruction.CaptureDamage</code></td>
+<td>writes every wall's damage into its Initial Damage asset (<a href="../setup/#pre-damaged-walls-and-saved-damage-beta">Setup</a>)</td>
+</tr>
+<tr>
+<td><code>GridNet.Measure</code></td>
+<td>(development builds, server) per wall: damaged cells per network quarter, bytes now, worst case</td>
+</tr>
+<tr>
+<td><code>GridNet.ToggleDebug</code></td>
+<td>(development builds) shows or hides this machine's net panel</td>
+</tr>
+<tr>
+<td><code>GridNet.CorruptCell &lt;Wall&gt; &lt;Cell&gt;</code></td>
+<td>(development builds) changes one damaged cell on this machine only, to watch desync detection heal it</td>
+</tr>
+</tbody>
+</table>
+<h2 id="what-you-see-what-to-check">What you see → what to check<a class="headerlink" href="#what-you-see-what-to-check" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>what you see</th>
+<th>look at</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>A setting does nothing</td>
+<td>Press <strong>Apply Preset</strong> on the wall. The preset overwrites the component, and a value set only on the component is off. <code>CheckPresets</code> lists stale walls.</td>
+</tr>
+<tr>
+<td>A setting is on the preset and still does nothing</td>
+<td>A Blueprint's Class Defaults override the C++ defaults. Check the placed actor's Details, not the source.</td>
+</tr>
+<tr>
+<td>I call the damage function and nothing happens</td>
+<td>It ran on a client. Every entry point is server-only and silent elsewhere. Check <strong>Has Authority</strong>.</td>
+</tr>
+<tr>
+<td>Client and server look different</td>
+<td><code>GridDestruction.HashCells</code>. MISMATCH names the first differing cell.</td>
+</tr>
+<tr>
+<td>A hole reads as a hard square</td>
+<td><code>FractureNoise</code> is 0, usually because the wall has no preset applied.</td>
+</tr>
+<tr>
+<td>Breaks ignore the texture's pattern</td>
+<td>The bake found no height map. The <code>FractureMask</code> log line names what it tried and what to set.</td>
+</tr>
+<tr>
+<td><code>pixel format BC7</code> and the mask is refused</td>
+<td>Re-import that texture as BC1 (Default).</td>
+</tr>
+<tr>
+<td><code>has no texture parameter 'Height'</code></td>
+<td>The same line lists every parameter the material has. Put one in <code>FractureHeightParameter</code>.</td>
+</tr>
+<tr>
+<td><code>none of them carry any bytes</code></td>
+<td>The texture streams and is not resident. Set <code>NeverStream</code> on it, or <code>MipGenSettings = NoMipmaps</code>.</td>
+</tr>
+<tr>
+<td><code>the texture is flat ... discarded</code></td>
+<td>The material's height slot holds an engine placeholder, usually <code>T_DefaultDisplacement</code>. The wall falls back to the hash meanwhile, which is correct.</td>
+</tr>
+<tr>
+<td>The pattern lands in the wrong places</td>
+<td><code>FractureMaskChannel</code>: the height may be in green or blue.</td>
+</tr>
+<tr>
+<td>Cracks follow brick bodies instead of joints</td>
+<td><code>bInvertFractureMask</code>.</td>
+</tr>
+<tr>
+<td>The pattern does not line up with the visible joints</td>
+<td><code>FractureMaskTiling</code> must match what the material does with the same texture; leave it at 1 unless the material tiles again inside itself.</td>
+</tr>
+<tr>
+<td>The pattern is too faint</td>
+<td>Raise <code>FractureMaskContrast</code> (ships at 2.0).</td>
+</tr>
+<tr>
+<td>Thin slivers hang off a hole's rim</td>
+<td>See <a href="#slivers-on-a-holes-rim">below</a>.</td>
+</tr>
+<tr>
+<td>A piece of wall hangs in the air</td>
+<td>It is held by an anchor: check the wall's <strong>Anchor Edges</strong> (<a href="../setup/#anchors-what-holds-a-wall-up">Setup</a>).</td>
+</tr>
+<tr>
+<td>A falling chunk freezes in mid-air</td>
+<td>A <code>HANGRISK</code> line names the value; see <a href="../surface-presets/#table-3-rubble">Surface presets → rubble</a>.</td>
+</tr>
+<tr>
+<td>A chunk never moves at all</td>
+<td><code>GridDestruction.ProfileWall</code>: a non-zero <code>degen=</code> is a bug; send the log line.</td>
+</tr>
+<tr>
+<td>A lintel falls on the first hit anywhere</td>
+<td><code>MaxOverhangCm</code> is below half the opening's width.</td>
+</tr>
+<tr>
+<td>A shot at the edge of a window dents the face</td>
+<td>Raise <code>CornerChipScale</code> and <code>RevealCrushScale</code> on the preset.</td>
+</tr>
+<tr>
+<td>The wall's outer edge is open when seen edge-on</td>
+<td>Tick the visible sides in <code>CapEdges</code>.</td>
+</tr>
+<tr>
+<td>Joints between walls flicker</td>
+<td>The wall material is two-sided; make it one-sided.</td>
+</tr>
+<tr>
+<td>A line of sky along a joint</td>
+<td>The walls are further apart than <code>SeamToleranceCm</code> (2 cm). <code>ShowSeams</code> shows what was linked.</td>
+</tr>
+<tr>
+<td>A slab's edge pieces hang in the air</td>
+<td>Clear the slab's Anchor Edges; a <code>SLABANCHOR</code> line says so at the first hit.</td>
+</tr>
+<tr>
+<td>Holes lag under very heavy fire</td>
+<td>The byte budget; see <a href="../multiplayer/#bandwidth-and-budgets">Multiplayer</a>.</td>
+</tr>
+<tr>
+<td>A late joiner gets no damage on one wall</td>
+<td>The wall is over the late-join size; see <a href="../multiplayer/#late-join-size">Multiplayer</a>.</td>
+</tr>
+<tr>
+<td>Debris pieces spin on the floor forever</td>
+<td>A custom Niagara system without the freeze-on-contact step; see <a href="../effects/#chunks-gpu">Effects</a>. <code>show Particles</code> hides all particles, to tell particles from falling wall pieces.</td>
+</tr>
+<tr>
+<td>Effect count keeps growing</td>
+<td>A system that never finishes; see <a href="../effects/#performance-rules">Effects → performance</a>.</td>
+</tr>
+<tr>
+<td>Frame time is bad on walls nobody shot</td>
+<td>The debug lattice is on (<code>bShowDebugCellsInGame</code> on GridVisual). It is off by default.</td>
+</tr>
+<tr>
+<td>Bots do not path through holes</td>
+<td>Set the navmesh's Runtime Generation to <strong>Dynamic</strong> (<a href="../setup/#ai-navigation">Setup</a>).</td>
+</tr>
+<tr>
+<td>The editor froze when reaching a wall's Details during play</td>
+<td>Do not eject with F8; use the console commands.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="slivers-on-a-holes-rim">Slivers on a hole's rim<a class="headerlink" href="#slivers-on-a-holes-rim" title="Permanent link">&para;</a></h2>
+<p><strong>Why they appear.</strong> Every cell resists a little differently, by design: that is
+what stops small holes reading as squares. At the rim of a blast the bite is close
+to what a cell has left, so neighbouring cells flip independently and a few tough
+ones are left standing in the opening.</p>
+<p><strong>What removes them:</strong> <code>MinSupportingNeighbours</code> and <code>SpikeSuppressionChance</code> on
+the preset, shipping at 2 and 0.7. Two standing neighbours remove single spikes
+and pieces hanging by one edge, and keep anything with a shoulder on two sides.
+The chance is 0.7 rather than 1.0 on purpose: a rim with every spike pruned reads
+as machined.</p>
+<ul>
+<li>By default the chance follows the break pattern, so brick cleans up along its
+  joints and keeps its teeth on the bricks. <code>SpikeMaskStrength</code> turns that down.</li>
+<li><strong>Do not raise <code>MinSupportingNeighbours</code> above 2</strong> to chase floating pieces:
+  at 3 or 4 it strips the rim of every hole. Pieces nothing holds fall on their
+  own; <code>IslandCollapse</code> in the log counts them.</li>
+<li>Lowering <code>FractureNoise</code> and <code>FractureMaskContrast</code> makes rim cells behave more
+  alike, at the cost of some raggedness.</li>
+</ul>
+<p>The pass costs nothing on the network: it looks only at cells the hit already
+touched, and the decision is a hash of the cell's position. The log says how many
+pieces it pruned on every hit that removes something:</p>
+<div class="highlight"><pre><span></span><code>SpikeSuppression [Wall_0]: pruned 3 piece(s) ... minNeighbours=2 chance=0.70 mask=fracture weights strength=1.00
+</code></pre></div>
+<p>The wall's own border and the cells beside an authored opening are never pruned.</p>
+<h2 id="reporting-a-problem">Reporting a problem<a class="headerlink" href="#reporting-a-problem" title="Permanent link">&para;</a></h2>
+<p>Write to <strong>annybelogurova@gmail.com</strong> with:</p>
+<ul>
+<li>whether you saw it in the server window, the client window or both;</li>
+<li>the output of <code>GridDestruction.HashCells</code> typed once while it is happening;</li>
+<li>the log lines the plugin printed around it (they start with the wall's name in
+  square brackets);</li>
+<li>the engine version and whether the project is Blueprint-only.</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href="../multiplayer/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Multiplayer">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                Multiplayer
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../changelog/" class="md-footer__link md-footer__link--next" aria-label="Next: Changelog">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                Changelog
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Grid Destruction &copy; 2026 Anna Gonezhuk &middot; developed by kytyji
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.sections", "navigation.top", "navigation.footer", "navigation.indexes", "content.code.copy", "search.highlight", "toc.follow"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"default": "latest", "provider": "mike"}}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+    
+  </body>
+</html>
