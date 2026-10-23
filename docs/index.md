@@ -88,6 +88,10 @@ GridDestructionEditor    ← viewport handles, kits, click building (editor only
 | `UGridNetClientComponent` | Lets a client ask for a resend at once; the on-screen net panel |
 | `UGridWallPreset` | The data asset you tune |
 
+## Credits
+
+Developed by **kytyji**. Published on Fab by **Anna Gonezhuk**.
+
 ## Support
 
 **annybelogurova@gmail.com**
