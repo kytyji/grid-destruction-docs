@@ -201,6 +201,10 @@ preset: plaster over brick, tiles over concrete. Place them parallel with the
 faces touching, within `SeamToleranceCm`. Each layer breaks by its own material,
 and a shot goes through them one at a time.
 
+<video src="../assets/clips/layered-walls.mp4" poster="../assets/clips/layered-walls.jpg" autoplay loop muted playsinline style="width:100%;border-radius:6px"></video>
+
+*Concrete over brick: each layer breaks by its own material.*
+
 The far-face blowout skips a face that is pressed against another layer, so the
 layers' holes line up and the wall reads as one. The outer faces keep it. To
 switch the blowout off on one placement, clear **Wall | Damage → Exit Spall** on
