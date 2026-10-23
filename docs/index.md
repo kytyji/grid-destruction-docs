@@ -47,8 +47,8 @@ collider, the structural collapse and the debris.
 
 The Core module has no dependency on Lyra, on the Gameplay Ability System or on
 anything but the engine. The plugin has been tested in a blank project and in a
-Lyra Starter Game copy, as a listen server, with clients on the same PC and on
-a second PC.
+Lyra Starter Game copy, as a listen server and as a dedicated server, with
+clients on the same PC and on a second PC.
 
 ## Not in this version
 
