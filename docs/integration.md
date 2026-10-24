@@ -40,7 +40,7 @@ After your trace, in Blueprint or C++:
     | `HitLocation` | the impact point, world space |
     | `HitDirection` | the direction the round was travelling, normalised |
     | `PeakDepthCm` | how deep it bites into reference material; a rifle bullet is 3–5 |
-    | `RadiusCm` | 0 for a bullet, above 0 for a blast |
+    | `RadiusCm` | the crater's radius. 0 lets the wall's preset decide (`MinSpallRadiusCells`, a crater of a cell or more). 2–5 cm leaves a small mark for a pistol round, on walls that subdivide. Above that, a blast |
     | `ImpactFace` | leave at `Auto`: it is derived from `HitDirection` |
 
 3. Call **Apply Grid Damage**.
@@ -106,7 +106,7 @@ The plugin does not care what fired.
 
 | weapon | call |
 |---|---|
-| **Hitscan** | once per hit, `RadiusCm = 0` |
+| **Hitscan** | once per hit; `RadiusCm = 0` for the preset's crater, or a few cm for a small round |
 | **Projectile** | from your impact handler, with the projectile's velocity as the direction |
 | **Explosion** | one call at the blast centre with `RadiusCm` set. You do not find the cells yourself |
 | **Melee, thrown, vehicle impact** | the same call |

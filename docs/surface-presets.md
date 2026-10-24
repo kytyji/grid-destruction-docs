@@ -240,7 +240,10 @@ past the limit logs an `OVERHANG` line once. `BuiltOverhangs` on the preset
 ### Shape of a hit
 
 `MinSpallRadiusCells`
-:   Every hit is spread over at least this radius. If an edge looks too smooth,
+:   The crater of a hit that brings no radius of its own (`RadiusCm = 0`). A
+    weapon that passes a radius keeps it on a wall that subdivides, so a small
+    round can leave a small mark without a denser grid; at `SubdivisionFactor`
+    1 this is the floor under every hit. If an edge looks too smooth,
     lower it to 0.8–1.0 on brick and concrete for a more local bite, and raise
     `FractureNoise` to keep small holes from reading as squares. Do not take it
     to 0.
