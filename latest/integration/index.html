@@ -1117,7 +1117,7 @@ After your trace, in Blueprint or C++:</p>
 </tr>
 <tr>
 <td><code>RadiusCm</code></td>
-<td>0 for a bullet, above 0 for a blast</td>
+<td>the crater's radius. 0 lets the wall's preset decide (<code>MinSpallRadiusCells</code>, a crater of a cell or more). 2–5 cm leaves a small mark for a pistol round, on walls that subdivide. Above that, a blast</td>
 </tr>
 <tr>
 <td><code>ImpactFace</code></td>
@@ -1187,7 +1187,7 @@ Call the plugin where you have the hit result, before the ASC check.</p>
 <tbody>
 <tr>
 <td><strong>Hitscan</strong></td>
-<td>once per hit, <code>RadiusCm = 0</code></td>
+<td>once per hit; <code>RadiusCm = 0</code> for the preset's crater, or a few cm for a small round</td>
 </tr>
 <tr>
 <td><strong>Projectile</strong></td>

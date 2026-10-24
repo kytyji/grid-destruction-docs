@@ -1818,7 +1818,10 @@ past the limit logs an <code>OVERHANG</code> line once. <code>BuiltOverhangs</co
 <h3 id="shape-of-a-hit">Shape of a hit<a class="headerlink" href="#shape-of-a-hit" title="Permanent link">&para;</a></h3>
 <dl>
 <dt><code>MinSpallRadiusCells</code></dt>
-<dd>Every hit is spread over at least this radius. If an edge looks too smooth,
+<dd>The crater of a hit that brings no radius of its own (<code>RadiusCm = 0</code>). A
+weapon that passes a radius keeps it on a wall that subdivides, so a small
+round can leave a small mark without a denser grid; at <code>SubdivisionFactor</code>
+1 this is the floor under every hit. If an edge looks too smooth,
 lower it to 0.8–1.0 on brick and concrete for a more local bite, and raise
 <code>FractureNoise</code> to keep small holes from reading as squares. Do not take it
 to 0.</dd>
