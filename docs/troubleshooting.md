@@ -17,7 +17,7 @@ after BeginPlay.
 | `GridDestruction.RebuildWalls` | rebuilds every wall's visible mesh now |
 | `GridDestruction.DumpGeometry` | audits winding, normals, counts and bounds on every wall |
 | `GridDestruction.ProfileWall` | per-wall mesh statistics, including `degen=` (should be 0) and `dropped=` |
-| `GridDestruction.ResetWalls` | every wall back to the damage it started with; on the server or standalone. The sample pawn's **R** key asks the server for you |
+| `GridDestruction.ResetWalls` | every wall back to the damage it started with; on the server or standalone. The sample character's **R** key asks the server for you |
 | `GridDestruction.CaptureDamage` | writes every wall's damage into its Initial Damage asset ([Setup](setup.md#pre-damaged-walls-and-saved-damage-beta)) |
 | `GridNet.Measure` | (development builds, server) per wall: damaged cells per network quarter, bytes now, worst case |
 | `GridNet.ToggleDebug` | (development builds) shows or hides this machine's net panel |

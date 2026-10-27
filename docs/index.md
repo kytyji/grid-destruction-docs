@@ -68,7 +68,7 @@ Five modules with a strict one-way dependency. That direction is what makes the
 plugin usable outside the project it was built in.
 
 ```
-GridDestructionSample    ← a worked example: a pawn that shoots the wall
+GridDestructionSample    ← a worked example: a third-person character that shoots the walls
         │
         ▼
 GridDestructionBridge    ← hit → grid damage, keyed by GameplayTag

@@ -415,5 +415,5 @@ need a key of your own.
 ### Resetting
 
 `GridDestruction.ResetWalls`, or **Reset Damage** on a wall, returns walls to the
-damage they started with: their Initial Damage, else intact. The sample pawn's
+damage they started with: their Initial Damage, else intact. The sample character's
 **R** key does this.

@@ -29,12 +29,12 @@ you set anything up.
 1. In the Content Browser, open **Settings → Show Plugin Content**.
 2. Open **Plugins → GridDestruction Content → Demo →
    `L_GridDestruction_Showcase`** and press **Play**.
-3. You fly a camera that shoots:
+3. You play a third-person UE Mannequin with four weapons:
 
     | key | action |
     |---|---|
     | WASD | move |
-    | E or Space / Q or Ctrl | up / down |
+    | Space | jump |
     | left mouse button | fire; hold for the cutter; throw the grenade |
     | **1** / **2** / **3** / **4** | rifle / breaching charge / cutter / grenade |
     | mouse wheel | cycle weapons |

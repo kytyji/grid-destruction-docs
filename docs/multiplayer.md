@@ -86,7 +86,7 @@ class with an **Add Components** action.
 
 ### The net panel
 
-With `bShowNetDebug` on the component (the sample pawn has it on; **H** or
+With `bShowNetDebug` on the component (the sample character has it on; **H** or
 `GridNet.ToggleDebug` toggles it), each machine draws a panel: role, ping,
 connection rates, how many walls match the server's published hash, the world
 hash (`HashCells`' number: equal on two PCs means equal walls), items sent or
