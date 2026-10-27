@@ -49,6 +49,8 @@ First release, for Unreal Engine 5.7 on Win64.
   and kits, live openings, texture placement controls.
 - Walls in the navmesh, with breaches walkable under a dynamic navmesh.
 - Damage snapshots for pre-damaged levels and save games (beta).
+- Sample wall pieces and four kits in `Variants/`, ready for the build
+  arrows' right-click menu.
 - A showcase level and a third-person sample character with a rifle, a breaching charge, a
   cutter and a thrown grenade.
 - Blueprint integration with no dependencies (Apply Grid Damage) or through a

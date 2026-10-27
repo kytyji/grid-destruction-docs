@@ -78,6 +78,15 @@ Every click and drag is one Ctrl+Z. The handles exist only in the editor.
 
 Make your own pieces once, then build from them.
 
+The plugin ships samples to start from in **GridDestruction Content →
+Variants**: concrete and brick walls 400 and 200 cm wide, wood 300 cm, stone
+400 cm and glass 200 cm, all 300 cm high, some with a centred door
+(100 × 200 cm) or window (100 × 100 cm). Four kits group them:
+`WK_Concrete`, `WK_Brick`, `WK_Wood` and `WK_Mixed` (every sample). Set one as
+a wall's **Build Kit**, or right-click a build arrow with no kit set to pick
+from every piece in the project. Duplicate a sample into your own folder
+before you change it: plugin content is replaced when you update the plugin.
+
 1. Content Browser → right-click → **Miscellaneous → Data Asset → Grid Wall
    Variant**. Set a preset, `Wall Size Cm`, and any doors and windows under
    `Openings`. Name it for what it is, for example `WV_Brick_400_Window`.
