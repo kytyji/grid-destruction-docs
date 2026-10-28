@@ -131,13 +131,11 @@ A good target: one bullet leaves visible but not solid chipping.
 
 ### d) The damaged area: `DamageTint`, `AreaSoftness`, `DamagedMapAmount`
 
-A dent is coloured as one patch through a black-and-white mask. The mask is a
-height blend of the dent against the fine breakup in the detail texture's alpha,
-so the patch's edge is:
+A dent is coloured as one patch, and the patch's edge is:
 
 - **ragged and chipped**, like knocked-off plaster, not the shape of the cells;
-- **sharp, a pixel wide at any distance**: its width is measured on screen
-  (`fwidth`), so it is neither blurry up close nor stepped far away;
+- **sharp, a pixel wide at any distance**: neither blurry up close nor stepped
+  far away;
 - sometimes **stopped by cracks**, where the breakup is lower.
 
 | parameter | default | what it does |
@@ -233,8 +231,7 @@ must take their UVs from `FaceUV`, or the offset has nothing to move.
 
 ## Parallax: where it is and how to see it
 
-The parallax is a single-step offset, not a POM loop, to keep the cost down.
-So it is **subtle by nature**:
+The parallax is kept cheap, so it is **subtle by nature**:
 
 - **It works only where there is depth**: in dents and open cracks. On an intact
   wall the offset is zero.
@@ -269,9 +266,8 @@ them.
 broken thickness a player looks into. Without B a rim inherits the face's brick
 or plaster, and the hole reads as a cut in paper. Wire B first, then R, then G.
 
-R is derived from the same corner depths that placed the vertex, so it cannot
-drift from what the player sees. G is computed from replicated cell state alone,
-so every machine builds the same numbers.
+R always matches the geometry the player sees, and every machine computes the
+same values.
 
 ### UV1
 

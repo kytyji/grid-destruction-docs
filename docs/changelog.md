@@ -6,8 +6,8 @@ First release, for Unreal Engine 5.7 on Win64.
 
 **Destruction**
 
-- Grid destruction with cells that erode from both faces, adaptive subdivision,
-  a procedural surface and a matching procedural collider.
+- Grid destruction with adaptive detail, a procedural surface and a matching
+  procedural collider.
 - Side erosion of caps, ends, window jambs and the bore of a hole; corners chip
   before faces dent; dents drawn in whole chips.
 - Exit blowout on the far face; glancing hits leave furrows; grazing and
@@ -25,8 +25,8 @@ First release, for Unreal Engine 5.7 on Win64.
 
 **Multiplayer**
 
-- Server-authoritative. Only damaged cells replicate, sharded and budgeted to
-  stay under the engine's limits.
+- Server-authoritative. Only damaged cells replicate, budgeted to stay under
+  the engine's limits.
 - Published per-wall hash, client desync detection and automatic resend;
   `GridNetClientComponent` for an immediate resend and an on-screen net panel.
 - `GridDestruction.HashCells` with its own MATCH / MISMATCH verdict;

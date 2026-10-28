@@ -339,22 +339,15 @@ ruined houses in the editor, or to carry a room's state between game sessions.
 
 ### What a snapshot is
 
-A snapshot is the struct **`FGridDamageSnapshot`**: a plain list of the wall's
-damaged cells, nothing else. No mesh, no collider, no textures are stored; the
-wall rebuilds all of those from the cells, exactly as it does after a shot.
+A snapshot is the struct **`FGridDamageSnapshot`**: the wall's damaged cells,
+nothing else. No mesh, no collider, no textures are stored; the wall rebuilds
+all of those from the cells, exactly as it does after a shot.
 
-| field | what it holds |
-|---|---|
-| `GridSizeX`, `GridSizeY`, `SubdivisionFactor` | the grid it was taken from. A snapshot fits only a wall with the same three numbers |
-| `Cells` | one entry per damaged cell: its index, how much was eaten from the front and from the back, and its state (hole, fallen, subdivided) |
-| `Fine` | the same for every damaged fine cell of a subdivided cell |
-| `Lateral` | the side cuts: how far a cap, a jamb or the bore of a hole was eaten |
-| `Version` | the format version, so a later plugin version can still read it |
-
-Depths are stored as a share of the wall's thickness (0–255), not in
-centimetres. Undamaged cells and authored openings are not stored: openings
-come from the wall itself. So a wall with a few holes is a few kilobytes, and
-an intact wall is an empty snapshot.
+A snapshot fits only a wall with the same grid size and `SubdivisionFactor`,
+and it carries a format version, so a later plugin version can still read it.
+Undamaged cells and authored openings are not stored: openings come from the
+wall itself. So a wall with a few holes is a few kilobytes, and an intact wall
+is an empty snapshot.
 
 There are two places to keep one:
 

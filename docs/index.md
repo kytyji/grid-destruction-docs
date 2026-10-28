@@ -6,9 +6,8 @@ Shoot a wall and a hole appears in real geometry. Bullets, grenades and players
 pass through it, and every client sees the identical hole.
 
 This is not decals, a swapped-out "broken" mesh or client-side cosmetics. The
-server owns a grid of cells, and each cell erodes from its front and back faces
-independently. Everything else is rebuilt from that one model: the surface, the
-collider, the structural collapse and the debris.
+server owns the wall's state, and everything else follows from it: the surface,
+the collider, the structural collapse and the debris.
 
 [Quick start](quick-start.md){ .md-button .md-button--primary }
 [Wire your weapons](integration.md){ .md-button }
@@ -26,7 +25,7 @@ collider, the structural collapse and the debris.
 | **Real holes** | A procedural surface rebuilt from cell state. Craters go the full depth of the wall, rims show its real thickness, and edges chip at the subdivision's own resolution rather than smearing. |
 | **Matching collision** | The collider carries the same holes as the mesh, so what you can see through, you can shoot and walk through. |
 | **Replication you can verify** | Only damaged cells replicate, budgeted to stay under the engine's limits, and clients never author damage. Each client checks its walls against a hash the server publishes and heals itself on a mismatch. `GridDestruction.HashCells` prints its own MATCH / MISMATCH verdict. |
-| **Adaptive subdivision** | A cell subdivides into fine children on its first bite. Detail exists only where the wall has been shot, so an untouched wall costs what a coarse grid costs. |
+| **Adaptive detail** | Fine detail exists only where the wall has been shot, so an untouched wall costs what a coarse grid costs. |
 | **Per-material behaviour** | Concrete, brick, stone, wood, metal and glass differ in penetration, spall, edge crumble, debris weight and grazing response. Glass is whole or gone. Every number is a documented preset field, and all of them live in one CSV table. |
 | **Every side breaks** | A shot on a top cap, an end or a window jamb cuts that side along its own normal, and the bore of a hole widens as it is shot through. |
 | **Joined walls** | Walls that meet at a corner or end to end find each other. The seam disappears, a hit crosses the joint, and pieces hold each other up only through real ground. |

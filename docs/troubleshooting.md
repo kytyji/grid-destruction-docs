@@ -79,8 +79,8 @@ as machined.
 - Lowering `FractureNoise` and `FractureMaskContrast` makes rim cells behave more
   alike, at the cost of some raggedness.
 
-The pass costs nothing on the network: it looks only at cells the hit already
-touched, and the decision is a hash of the cell's position. The log says how many
+The pass costs nothing on the network, and every machine prunes the same
+pieces. The log says how many
 pieces it pruned on every hit that removes something:
 
 ```

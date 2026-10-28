@@ -36,10 +36,8 @@ PCs, compare the `world hash` on each machine's net panel (below).
 
 ## What replicates
 
-Only damaged cells: one item per damaged cell, carrying that cell's whole state.
-The grid's size, its material and its openings replicate once. Every machine
-builds the undamaged wall itself, so an undamaged wall costs nothing after its
-first update, and a late joiner receives only the cells that were actually hit.
+Only damaged cells. An undamaged wall costs nothing after its first update, and
+a late joiner receives only the cells that were actually hit.
 
 Rubble, effects, sounds and the damage material's look do not replicate: every
 machine derives them from the cells.
@@ -50,7 +48,7 @@ machine derives them from the cells.
 
 | setting | default | what it trades |
 |---|---|---|
-| `ItemsPerShardPerFlush` | 128 | Cells one wall sends per update, per quarter of the wall. Lower: holes appear over a few more frames under heavy fire, with flatter peaks. Keep it well under 512: the engine refuses an update over 2048 changes, and a lost packet merges updates. |
+| `ItemsPerShardPerFlush` | 128 | Cells one wall sends per update. Lower: holes appear over a few more frames under heavy fire, with flatter peaks. Keep it well under 512: the engine refuses an update over 2048 changes, and a lost packet merges updates. |
 | `MinFlushIntervalSeconds` | 0.1 | Shortest time between two updates of one wall. |
 | `MaxBytesPerSecond` | 65536 | All walls together. Keep it well under your project's `MaxClientRate` (engine default 100000, Lyra 200000): damage shares the connection with movement. |
 | `BurstBytes` | 32768 | How much may go out at once after a quiet spell, such as the first grenade. |
@@ -66,8 +64,8 @@ the default budget carries roughly 1000 cells per second across all walls. Raise
 `MaxBytesPerSecond` if your `MaxClientRate` has room, or lower
 `SubdivisionFactor`.
 
-`GridNet.Measure` (on the server, development builds) prints what each wall's
-network copy holds per quarter, in bytes, and its worst case.
+`GridNet.Measure` (on the server, development builds) prints what each wall
+costs on the network now, in bytes, and its worst case.
 
 ## Desync detection and self-heal
 

@@ -27,7 +27,5 @@ branch → `gh-pages` / root).
 
 ## Editing rules
 
-- Written for buyers: no internal decision numbers outside the Changelog, and no
-  references to the plugin repository's internal notes.
 - Internal links are relative (`setup.md#anchors-what-holds-a-wall-up`), so they
   work in every version.
