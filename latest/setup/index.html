@@ -1600,43 +1600,14 @@ later version.</p>
 <p>A wall's damage can be saved as a <strong>snapshot</strong> and put back later: to build
 ruined houses in the editor, or to carry a room's state between game sessions.</p>
 <h3 id="what-a-snapshot-is">What a snapshot is<a class="headerlink" href="#what-a-snapshot-is" title="Permanent link">&para;</a></h3>
-<p>A snapshot is the struct <strong><code>FGridDamageSnapshot</code></strong>: a plain list of the wall's
-damaged cells, nothing else. No mesh, no collider, no textures are stored; the
-wall rebuilds all of those from the cells, exactly as it does after a shot.</p>
-<table>
-<thead>
-<tr>
-<th>field</th>
-<th>what it holds</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>GridSizeX</code>, <code>GridSizeY</code>, <code>SubdivisionFactor</code></td>
-<td>the grid it was taken from. A snapshot fits only a wall with the same three numbers</td>
-</tr>
-<tr>
-<td><code>Cells</code></td>
-<td>one entry per damaged cell: its index, how much was eaten from the front and from the back, and its state (hole, fallen, subdivided)</td>
-</tr>
-<tr>
-<td><code>Fine</code></td>
-<td>the same for every damaged fine cell of a subdivided cell</td>
-</tr>
-<tr>
-<td><code>Lateral</code></td>
-<td>the side cuts: how far a cap, a jamb or the bore of a hole was eaten</td>
-</tr>
-<tr>
-<td><code>Version</code></td>
-<td>the format version, so a later plugin version can still read it</td>
-</tr>
-</tbody>
-</table>
-<p>Depths are stored as a share of the wall's thickness (0–255), not in
-centimetres. Undamaged cells and authored openings are not stored: openings
-come from the wall itself. So a wall with a few holes is a few kilobytes, and
-an intact wall is an empty snapshot.</p>
+<p>A snapshot is the struct <strong><code>FGridDamageSnapshot</code></strong>: the wall's damaged cells,
+nothing else. No mesh, no collider, no textures are stored; the wall rebuilds
+all of those from the cells, exactly as it does after a shot.</p>
+<p>A snapshot fits only a wall with the same grid size and <code>SubdivisionFactor</code>,
+and it carries a format version, so a later plugin version can still read it.
+Undamaged cells and authored openings are not stored: openings come from the
+wall itself. So a wall with a few holes is a few kilobytes, and an intact wall
+is an empty snapshot.</p>
 <p>There are two places to keep one:</p>
 <ul>
 <li><strong>An asset</strong>, <code>GridDamagePreset</code>. It holds one snapshot and is saved in your

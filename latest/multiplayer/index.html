@@ -905,10 +905,8 @@ command refuses to give a verdict over one world. Each wall's line also carries
 machine's own, so one window's log already says whether it agrees. Between two
 PCs, compare the <code>world hash</code> on each machine's net panel (below).</p>
 <h2 id="what-replicates">What replicates<a class="headerlink" href="#what-replicates" title="Permanent link">&para;</a></h2>
-<p>Only damaged cells: one item per damaged cell, carrying that cell's whole state.
-The grid's size, its material and its openings replicate once. Every machine
-builds the undamaged wall itself, so an undamaged wall costs nothing after its
-first update, and a late joiner receives only the cells that were actually hit.</p>
+<p>Only damaged cells. An undamaged wall costs nothing after its first update, and
+a late joiner receives only the cells that were actually hit.</p>
 <p>Rubble, effects, sounds and the damage material's look do not replicate: every
 machine derives them from the cells.</p>
 <h2 id="bandwidth-and-budgets">Bandwidth and budgets<a class="headerlink" href="#bandwidth-and-budgets" title="Permanent link">&para;</a></h2>
@@ -925,7 +923,7 @@ machine derives them from the cells.</p>
 <tr>
 <td><code>ItemsPerShardPerFlush</code></td>
 <td>128</td>
-<td>Cells one wall sends per update, per quarter of the wall. Lower: holes appear over a few more frames under heavy fire, with flatter peaks. Keep it well under 512: the engine refuses an update over 2048 changes, and a lost packet merges updates.</td>
+<td>Cells one wall sends per update. Lower: holes appear over a few more frames under heavy fire, with flatter peaks. Keep it well under 512: the engine refuses an update over 2048 changes, and a lost packet merges updates.</td>
 </tr>
 <tr>
 <td><code>MinFlushIntervalSeconds</code></td>
@@ -974,8 +972,8 @@ is what limits it. A brick cell at subdivision 4 costs up to about 62 bytes, so
 the default budget carries roughly 1000 cells per second across all walls. Raise
 <code>MaxBytesPerSecond</code> if your <code>MaxClientRate</code> has room, or lower
 <code>SubdivisionFactor</code>.</p>
-<p><code>GridNet.Measure</code> (on the server, development builds) prints what each wall's
-network copy holds per quarter, in bytes, and its worst case.</p>
+<p><code>GridNet.Measure</code> (on the server, development builds) prints what each wall
+costs on the network now, in bytes, and its worst case.</p>
 <h2 id="desync-detection-and-self-heal">Desync detection and self-heal<a class="headerlink" href="#desync-detection-and-self-heal" title="Permanent link">&para;</a></h2>
 <p>The server publishes a hash per wall. A client compares each wall with it; when
 they still differ on a second look, it logs a <code>DESYNC</code> warning and asks the

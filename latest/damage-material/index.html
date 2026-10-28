@@ -1381,13 +1381,11 @@ of 2–4 cm.</p>
   CSV, not the material.</li>
 </ul>
 <h3 id="d-the-damaged-area-damagetint-areasoftness-damagedmapamount">d) The damaged area: <code>DamageTint</code>, <code>AreaSoftness</code>, <code>DamagedMapAmount</code><a class="headerlink" href="#d-the-damaged-area-damagetint-areasoftness-damagedmapamount" title="Permanent link">&para;</a></h3>
-<p>A dent is coloured as one patch through a black-and-white mask. The mask is a
-height blend of the dent against the fine breakup in the detail texture's alpha,
-so the patch's edge is:</p>
+<p>A dent is coloured as one patch, and the patch's edge is:</p>
 <ul>
 <li><strong>ragged and chipped</strong>, like knocked-off plaster, not the shape of the cells;</li>
-<li><strong>sharp, a pixel wide at any distance</strong>: its width is measured on screen
-  (<code>fwidth</code>), so it is neither blurry up close nor stepped far away;</li>
+<li><strong>sharp, a pixel wide at any distance</strong>: neither blurry up close nor stepped
+  far away;</li>
 <li>sometimes <strong>stopped by cracks</strong>, where the breakup is lower.</li>
 </ul>
 <table>
@@ -1592,8 +1590,7 @@ above applies to them.</p>
 <p><strong>Without <code>FaceUV</code> on the textures there is no parallax</strong>: the surface textures
 must take their UVs from <code>FaceUV</code>, or the offset has nothing to move.</p>
 <h2 id="parallax-where-it-is-and-how-to-see-it">Parallax: where it is and how to see it<a class="headerlink" href="#parallax-where-it-is-and-how-to-see-it" title="Permanent link">&para;</a></h2>
-<p>The parallax is a single-step offset, not a POM loop, to keep the cost down.
-So it is <strong>subtle by nature</strong>:</p>
+<p>The parallax is kept cheap, so it is <strong>subtle by nature</strong>:</p>
 <ul>
 <li><strong>It works only where there is depth</strong>: in dents and open cracks. On an intact
   wall the offset is zero.</li>
@@ -1652,9 +1649,8 @@ them.</p>
 <p><strong>B is the one that earns the feature.</strong> A hole's rim and a capped edge are the
 broken thickness a player looks into. Without B a rim inherits the face's brick
 or plaster, and the hole reads as a cut in paper. Wire B first, then R, then G.</p>
-<p>R is derived from the same corner depths that placed the vertex, so it cannot
-drift from what the player sees. G is computed from replicated cell state alone,
-so every machine builds the same numbers.</p>
+<p>R always matches the geometry the player sees, and every machine computes the
+same values.</p>
 <h3 id="uv1">UV1<a class="headerlink" href="#uv1" title="Permanent link">&para;</a></h3>
 <p><code>TexCoord</code> index <strong>1</strong>: 0..1 across the whole wall on both axes, whatever its
 size, and independent of <code>UV Tile Cm</code>. It does not move when the wall is damaged.

@@ -827,9 +827,8 @@
 <p>Shoot a wall and a hole appears in real geometry. Bullets, grenades and players
 pass through it, and every client sees the identical hole.</p>
 <p>This is not decals, a swapped-out "broken" mesh or client-side cosmetics. The
-server owns a grid of cells, and each cell erodes from its front and back faces
-independently. Everything else is rebuilt from that one model: the surface, the
-collider, the structural collapse and the debris.</p>
+server owns the wall's state, and everything else follows from it: the surface,
+the collider, the structural collapse and the debris.</p>
 <p><a class="md-button md-button--primary" href="quick-start/">Quick start</a>
 <a class="md-button" href="integration/">Wire your weapons</a></p>
 <video src="assets/clips/room-collapse.mp4" poster="assets/clips/room-collapse.jpg" autoplay loop muted playsinline style="width:100%;border-radius:6px"></video>
@@ -858,8 +857,8 @@ collider, the structural collapse and the debris.</p>
 <td>Only damaged cells replicate, budgeted to stay under the engine's limits, and clients never author damage. Each client checks its walls against a hash the server publishes and heals itself on a mismatch. <code>GridDestruction.HashCells</code> prints its own MATCH / MISMATCH verdict.</td>
 </tr>
 <tr>
-<td><strong>Adaptive subdivision</strong></td>
-<td>A cell subdivides into fine children on its first bite. Detail exists only where the wall has been shot, so an untouched wall costs what a coarse grid costs.</td>
+<td><strong>Adaptive detail</strong></td>
+<td>Fine detail exists only where the wall has been shot, so an untouched wall costs what a coarse grid costs.</td>
 </tr>
 <tr>
 <td><strong>Per-material behaviour</strong></td>
