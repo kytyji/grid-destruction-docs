@@ -39,7 +39,7 @@ the collider, the structural collapse and the debris.
 
 ## Requirements
 
-- Unreal Engine **5.7**, **Win64**.
+- Unreal Engine **5.7** or **5.8**, **Win64**.
 - A C++ project, or the Fab binaries for a Blueprint-only project.
 - The `ProceduralMeshComponent` and `Niagara` engine plugins. Both are declared
   as dependencies, and the editor enables them for you.
@@ -52,7 +52,7 @@ clients on the same PC and on a second PC.
 ## Not in this version
 
 - Walls are **planar**. Curved and cylindrical sections are on the roadmap.
-- Built and tested against **Unreal Engine 5.7 only**, on **Win64**.
+- Built and tested against **Unreal Engine 5.7 and 5.8**, on **Win64**.
 - The shipped damage material is **one generic look** (cracks, chips, dust). The
   data under it is documented channel by channel, for a material of your own.
 - **A late joiner receives each wall's damaged cells in one update**, which the

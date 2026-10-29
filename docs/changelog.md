@@ -2,7 +2,7 @@
 
 ## 1.0.0
 
-First release, for Unreal Engine 5.7 on Win64.
+First release, for Unreal Engine 5.7 and 5.8 on Win64.
 
 **Destruction**
 

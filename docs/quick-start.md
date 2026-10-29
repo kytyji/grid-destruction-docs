@@ -7,7 +7,7 @@ setup are silent and look like "nothing happened".
 ## 1. Install
 
 **From Fab.** In the Epic Games Launcher, open **Library → Fab Library**, find
-Grid Destruction and click **Install to Engine** for 5.7. Then, in your project,
+Grid Destruction and click **Install to Engine** for your engine, 5.7 or 5.8. Then, in your project,
 open **Edit → Plugins**, search for *Grid Destruction*, tick it and restart the
 editor.
 
