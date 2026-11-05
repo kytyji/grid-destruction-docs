@@ -11,6 +11,7 @@ the collider, the structural collapse and the debris.
 
 [Quick start](quick-start.md){ .md-button .md-button--primary }
 [Wire your weapons](integration.md){ .md-button }
+[Get it on Fab](https://www.fab.com/listings/3a41d8b7-a4e0-4730-8df7-5ba2ff4fd9e0){ .md-button }
 
 <video src="assets/clips/room-collapse.mp4" poster="assets/clips/room-collapse.jpg" autoplay loop muted playsinline style="width:100%;border-radius:6px"></video>
 
@@ -93,7 +94,7 @@ GridDestructionEditor    ← viewport handles, kits, click building (editor only
 
 ## Credits
 
-Developed by **kytyji**. Published on Fab by **Anna Gonezhuk**.
+Developed by **kytyji**. Published on [Fab](https://www.fab.com/listings/3a41d8b7-a4e0-4730-8df7-5ba2ff4fd9e0) by **Anna Gonezhuk**.
 
 ## Support
 
@@ -103,5 +104,5 @@ Two things save a round trip when you report something: whether you saw it in
 the server window, the client window or both, and the output of
 `GridDestruction.HashCells` typed once while it is happening.
 
-Grid Destruction is distributed through Fab. Your rights to a purchased copy
+Grid Destruction is distributed through [Fab](https://www.fab.com/listings/3a41d8b7-a4e0-4730-8df7-5ba2ff4fd9e0). Your rights to a purchased copy
 come from the Fab Content License Agreement.

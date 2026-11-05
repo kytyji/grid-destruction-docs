@@ -3,6 +3,8 @@
 Source of the documentation site for the Grid Destruction plugin for Unreal
 Engine 5: **https://kytyji.github.io/grid-destruction-docs/**
 
+The plugin on Fab: https://www.fab.com/listings/3a41d8b7-a4e0-4730-8df7-5ba2ff4fd9e0
+
 ## Build locally
 
 ```
