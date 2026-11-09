@@ -30,7 +30,7 @@ the collider, the structural collapse and the debris.
 | **Per-material behaviour** | Concrete, brick, stone, wood, metal and glass differ in penetration, spall, edge crumble, debris weight and grazing response. Glass is whole or gone. Every number is a documented preset field, and all of them live in one CSV table. |
 | **Every side breaks** | A shot on a top cap, an end or a window jamb cuts that side along its own normal, and the bore of a hole widens as it is shot through. |
 | **Joined walls** | Walls that meet at a corner or end to end find each other. The seam disappears, a hit crosses the joint, and pieces hold each other up only through real ground. |
-| **Rebar** | Concrete can carry steel: a grate in the hole stops players and lets bullets through until it is cut. Wall mats and column cages, at no extra bandwidth. |
+| **Rebar** | Concrete can carry steel: a grate in the hole stops players and lets bullets through until it is cut, at no extra bandwidth. |
 | **Structural collapse** | Detached pieces fall as rubble with the weight of their material. A ceiling rests on the walls below it, and an overhang longer than the material can carry gives way. |
 | **Authored break patterns** | A mask, or the height map of the wall's own material. Brick cracks along its mortar joints. |
 | **A ready damage material** | Dents read as chips and cracks with parallax depth, holes get cracks and dust, and broken rims show the inside of the material. An intact wall looks exactly like its textures. |

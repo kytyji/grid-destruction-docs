@@ -9,7 +9,7 @@
 - A grate of bars stops players and lets bullets through, on every machine including a dedicated server.
 - Damage marked **Cuts Rebar** removes it and leaves short ends at the cut; a collapse takes the steel of what fell.
   In the sample the cutter and the breaching charge cut.
-- Wall mats and column cages with rounded stirrups, a sample ribbed bar, and a new preset `GP_Concrete_Column`.
+- A sample ribbed bar, laid in pieces so its ribs never stretch.
 - One bit per cell in a byte that already replicates: no extra bandwidth.
 - **Line Trace For Rebar Cut**, for weapons that have to hit the grate.
 

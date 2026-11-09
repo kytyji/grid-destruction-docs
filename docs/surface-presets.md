@@ -374,13 +374,14 @@ On the preset, section **Wall | Rebar**.
 |---|---|---|
 | `bRebar` | off (on in `GP_Concrete`) | the wall has steel in it |
 | `RebarCutBy` | `Cutting` | `Cutting`: damage marked **Cuts Rebar** removes it. `None`: indestructible bars. A collapse takes the steel of what fell either way |
-| `RebarLayout` | `Mats` | `Mats`: one mesh of straight bars behind each face, for a wall or slab. `Cage`: perimeter bars and closed stirrups, for a column |
+| `RebarLayout` | `Mats` | `Mats`: one mesh of straight bars behind each face. `Cage` (experimental): perimeter bars and closed stirrups. Side cuts run through the full thickness of a wall, so sections much thicker than about 40 cm do not break convincingly yet |
 | `RebarSpacingCm` | 20, 20 | between bars: X along the wall, Y up it. In centimetres from the wall's edge, so cell density never moves a bar |
 | `RebarCoverCm` | 4 | concrete over the steel. 0 lays a single mesh in the middle |
 | `RebarDiameterCm` | 1.2 | the bar's real thickness; stirrups bend no tighter than four of these |
 | `RebarVisualScale` | 1.4 | drawn this much thicker, so a bar reads at a distance. The collider ignores it |
 | `RebarWobbleCm` | 0.8 | how far a bar strays from its line. Kept inside the cover, so no bar pokes out of an intact face |
-| `RebarCornerRadiusCm` | 0 | `Cage` only: the section's corner radius, which the stirrups follow less the cover |
+| `RebarCornerRadiusCm` | 0 | `Cage` only (experimental): the section's corner radius, which the stirrups follow less the cover |
+| `RebarMaxFreeCm` | 120 | how far bare steel reaches from the nearest concrete. Past it the bars are gone, so a wall eaten away does not leave a whole cage standing. 0: no limit |
 | `RebarStubMaxCm` | 12 | the longest end left sticking out at a cut (and always under half a cell) |
 | `RebarMesh` | `SM_Grid_Rebar_20` in `GP_Concrete` | one piece of bar at real size, along Z, centred. A bar is laid as pieces of this length, so ribs never stretch. Empty: the engine cylinder |
 | `RebarMaterial` | empty | overrides the mesh's own material |
@@ -399,7 +400,6 @@ machine lays out the same steel from the same cells. A dedicated server draws no
 movement is checked there.
 
 Rebar fields are read when the wall begins play, so **Apply Preset** is not needed after editing them.
-`GP_Concrete_Column` is a ready example of `Cage`: 120 cm thick, 20 cm corner radius.
 
 To make a weapon or a device cut it, see [Cutting rebar](integration.md#cutting-rebar).
 
