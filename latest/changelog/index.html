@@ -640,6 +640,17 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#110" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.1.0
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#100" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -685,6 +696,17 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#110" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.1.0
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#100" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -713,6 +735,28 @@
 
 
 <h1 id="changelog">Changelog<a class="headerlink" href="#changelog" title="Permanent link">&para;</a></h1>
+<h2 id="110">1.1.0<a class="headerlink" href="#110" title="Permanent link">&para;</a></h2>
+<p><strong>Rebar</strong></p>
+<ul>
+<li>Concrete can carry steel. Bars show in holes, in craters deeper than the cover and in chipped sides, and stay
+  only while steel joins them to standing concrete.</li>
+<li>A grate of bars stops players and lets bullets through, on every machine including a dedicated server.</li>
+<li>Damage marked <strong>Cuts Rebar</strong> removes it and leaves short ends at the cut; a collapse takes the steel of what fell.
+  In the sample the cutter and the breaching charge cut.</li>
+<li>A sample ribbed bar, laid in pieces so its ribs never stretch.</li>
+<li>One bit per cell in a byte that already replicates: no extra bandwidth.</li>
+<li><strong>Line Trace For Rebar Cut</strong>, for weapons that have to hit the grate.</li>
+</ul>
+<p><strong>Damage material</strong></p>
+<ul>
+<li><code>InteriorColorMap</code>, <code>InteriorAmount</code> and <code>InteriorDepth</code>: the inside of a wall can have its own, darker texture.
+  Off by default; on in the concrete demo instance.</li>
+</ul>
+<div class="admonition warning">
+<p class="admonition-title">After updating from 1.0.0</p>
+<p>Walls using <code>GP_Concrete</code> now have rebar, and a hole through them blocks players until it is cut. To keep the old
+behaviour, untick <code>bRebar</code> on the preset.</p>
+</div>
 <h2 id="100">1.0.0<a class="headerlink" href="#100" title="Permanent link">&para;</a></h2>
 <p>First release, for Unreal Engine 5.7 and 5.8 on Win64.</p>
 <p><strong>Destruction</strong></p>

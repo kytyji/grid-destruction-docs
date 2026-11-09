@@ -616,6 +616,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#table-4-rebar" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Table 4: rebar
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#where-each-knob-lives" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1070,6 +1081,17 @@
     <span class="md-ellipsis">
       
         Table 3: rubble
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#table-4-rebar" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Table 4: rebar
       
     </span>
   </a>
@@ -2013,6 +2035,97 @@ a capped edge looks like a knife edge, raise <code>HoleRimThicknessFraction</cod
 </table>
 <p>The first two are clamped to a safe range when read. A wall carrying an
 out-of-range value says so once at BeginPlay in a <code>HANGRISK</code> line.</p>
+<h2 id="table-4-rebar">Table 4: rebar<a class="headerlink" href="#table-4-rebar" title="Permanent link">&para;</a></h2>
+<p>On the preset, section <strong>Wall | Rebar</strong>.</p>
+<table>
+<thead>
+<tr>
+<th>preset field</th>
+<th>ships at</th>
+<th>what it does</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>bRebar</code></td>
+<td>off (on in <code>GP_Concrete</code>)</td>
+<td>the wall has steel in it</td>
+</tr>
+<tr>
+<td><code>RebarCutBy</code></td>
+<td><code>Cutting</code></td>
+<td><code>Cutting</code>: damage marked <strong>Cuts Rebar</strong> removes it. <code>None</code>: indestructible bars. A collapse takes the steel of what fell either way</td>
+</tr>
+<tr>
+<td><code>RebarLayout</code></td>
+<td><code>Mats</code></td>
+<td><code>Mats</code>: one mesh of straight bars behind each face. <code>Cage</code> (experimental): perimeter bars and closed stirrups. Side cuts run through the full thickness of a wall, so sections much thicker than about 40 cm do not break convincingly yet</td>
+</tr>
+<tr>
+<td><code>RebarSpacingCm</code></td>
+<td>20, 20</td>
+<td>between bars: X along the wall, Y up it. In centimetres from the wall's edge, so cell density never moves a bar</td>
+</tr>
+<tr>
+<td><code>RebarCoverCm</code></td>
+<td>4</td>
+<td>concrete over the steel. 0 lays a single mesh in the middle</td>
+</tr>
+<tr>
+<td><code>RebarDiameterCm</code></td>
+<td>1.2</td>
+<td>the bar's real thickness; stirrups bend no tighter than four of these</td>
+</tr>
+<tr>
+<td><code>RebarVisualScale</code></td>
+<td>1.4</td>
+<td>drawn this much thicker, so a bar reads at a distance. The collider ignores it</td>
+</tr>
+<tr>
+<td><code>RebarWobbleCm</code></td>
+<td>0.8</td>
+<td>how far a bar strays from its line. Kept inside the cover, so no bar pokes out of an intact face</td>
+</tr>
+<tr>
+<td><code>RebarCornerRadiusCm</code></td>
+<td>0</td>
+<td><code>Cage</code> only (experimental): the section's corner radius, which the stirrups follow less the cover</td>
+</tr>
+<tr>
+<td><code>RebarMaxFreeCm</code></td>
+<td>120</td>
+<td>how far bare steel reaches from the nearest concrete. Past it the bars are gone, so a wall eaten away does not leave a whole cage standing. 0: no limit</td>
+</tr>
+<tr>
+<td><code>RebarStubMaxCm</code></td>
+<td>12</td>
+<td>the longest end left sticking out at a cut (and always under half a cell)</td>
+</tr>
+<tr>
+<td><code>RebarMesh</code></td>
+<td><code>SM_Grid_Rebar_20</code> in <code>GP_Concrete</code></td>
+<td>one piece of bar at real size, along Z, centred. A bar is laid as pieces of this length, so ribs never stretch. Empty: the engine cylinder</td>
+</tr>
+<tr>
+<td><code>RebarMaterial</code></td>
+<td>empty</td>
+<td>overrides the mesh's own material</td>
+</tr>
+</tbody>
+</table>
+<p><strong>What a player sees.</strong> Bars appear where the concrete no longer hides them: in holes, and in
+craters and chipped sides deeper than the cover. They stay only while steel joins them to standing concrete, so
+nothing hangs in the air.</p>
+<p><strong>What it does in play.</strong> A grate of bars stops a player and lets bullets, cameras and physics bodies through.
+Damage marked <strong>Cuts Rebar</strong> removes the steel it touches and leaves short ends at the edge of the cut; a repair
+that rebuilds a cell gives its steel back. In the sample, the cutter and the breaching charge cut; the rifle and
+the grenade do not.</p>
+<p><strong>Network.</strong> The bars cost nothing on the wire: one bit in the cell's flags byte, which already replicates, and every
+machine lays out the same steel from the same cells. A dedicated server draws no bars but keeps the grate, because
+movement is checked there.</p>
+<p>Rebar fields are read when the wall begins play, so <strong>Apply Preset</strong> is not needed after editing them.</p>
+<p>To make a weapon or a device cut it, see <a href="../integration/#cutting-rebar">Cutting rebar</a>.</p>
+<hr />
 <h2 id="where-each-knob-lives">Where each knob lives<a class="headerlink" href="#where-each-knob-lives" title="Permanent link">&para;</a></h2>
 <table>
 <thead>

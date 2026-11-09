@@ -1294,6 +1294,10 @@ maps as the break pattern.</p>
 <td><code>DamagedNormalMap</code></td>
 <td><strong>optional.</strong> The normal map for <code>DamagedColorMap</code>, Compression = Normalmap, so the relief changes too</td>
 </tr>
+<tr>
+<td><code>InteriorColorMap</code></td>
+<td><strong>optional.</strong> A texture of the inside of the wall, usually darker than <code>DamagedColorMap</code>. Shows on hole rims and where the wall is eaten past <code>InteriorDepth</code>, when <code>InteriorAmount</code> is above 0</td>
+</tr>
 </tbody>
 </table>
 <div class="admonition success">
@@ -1416,6 +1420,16 @@ of 2–4 cm.</p>
 <td><code>DamagedRoughness</code></td>
 <td>0.95</td>
 <td>roughness of the broken material</td>
+</tr>
+<tr>
+<td><code>InteriorAmount</code></td>
+<td>0</td>
+<td>0: off. 1: <code>InteriorColorMap</code> inside craters and on rims. The concrete demo instance uses 1</td>
+</tr>
+<tr>
+<td><code>InteriorDepth</code></td>
+<td>0.3</td>
+<td>share of the thickness eaten before the inside shows (0.3 is 6 cm of 20). Lower widens the dark area</td>
 </tr>
 </tbody>
 </table>

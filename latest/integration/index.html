@@ -638,6 +638,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#cutting-rebar" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Cutting rebar
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#other-calls-worth-knowing" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -917,6 +928,17 @@
     <span class="md-ellipsis">
       
         Authority
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cutting-rebar" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Cutting rebar
       
     </span>
   </a>
@@ -1220,6 +1242,19 @@ shared damage function, without guarding them yourself.</p>
 <p>For multiplayer, add <strong><code>GridNetClientComponent</code></strong> to your PlayerController or
 pawn. It needs no code: it lets a client ask the server to resend a wall that went
 out of sync, so it heals at once. See <a href="../multiplayer/#fast-resync">Multiplayer</a>.</p>
+<h2 id="cutting-rebar">Cutting rebar<a class="headerlink" href="#cutting-rebar" title="Permanent link">&para;</a></h2>
+<p>A wall whose preset has <code>bRebar</code> leaves a grate of bars in a hole: it stops players and lets bullets through. To
+make a weapon or a device cut it:</p>
+<ol>
+<li>Tick <strong>Cuts Rebar</strong> on its <code>GridImpactProfile</code>, or set <code>Cuts Rebar</code> on the event or params you send. It removes the
+   steel of the cell it lands in and of every cell it touches at half strength or more.</li>
+<li>Find the hit with <strong>Line Trace For Rebar Cut</strong>, on <code>GridDestructionBridgeComponent</code>, instead of your own trace. A
+   grate ignores weapon traces by design, so an ordinary trace aimed at the middle of a hole flies through and hits
+   nothing. Bullets keep their ordinary trace.</li>
+<li>Send the hit from the server, like any other damage.</li>
+</ol>
+<p>A device stuck to the concrete at the edge of a hole needs only step 1. Cutting time, ammunition, sparks and sound
+are your game's.</p>
 <h2 id="other-calls-worth-knowing">Other calls worth knowing<a class="headerlink" href="#other-calls-worth-knowing" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
