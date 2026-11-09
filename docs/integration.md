@@ -127,6 +127,21 @@ For multiplayer, add **`GridNetClientComponent`** to your PlayerController or
 pawn. It needs no code: it lets a client ask the server to resend a wall that went
 out of sync, so it heals at once. See [Multiplayer](multiplayer.md#fast-resync).
 
+## Cutting rebar
+
+A wall whose preset has `bRebar` leaves a grate of bars in a hole: it stops players and lets bullets through. To
+make a weapon or a device cut it:
+
+1. Tick **Cuts Rebar** on its `GridImpactProfile`, or set `Cuts Rebar` on the event or params you send. It removes the
+   steel of the cell it lands in and of every cell it touches at half strength or more.
+2. Find the hit with **Line Trace For Rebar Cut**, on `GridDestructionBridgeComponent`, instead of your own trace. A
+   grate ignores weapon traces by design, so an ordinary trace aimed at the middle of a hole flies through and hits
+   nothing. Bullets keep their ordinary trace.
+3. Send the hit from the server, like any other damage.
+
+A device stuck to the concrete at the edge of a hole needs only step 1. Cutting time, ammunition, sparks and sound
+are your game's.
+
 ## Other calls worth knowing
 
 | call | on | what it does |

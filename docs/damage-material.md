@@ -58,6 +58,7 @@ You need **one instance per wall material**: `MI_Brick_Damage`,
 | `UVTiling` | the number your old material multiplied TexCoord by. If it used TexCoord directly, leave 1 |
 | `DamagedColorMap` | **optional.** A texture of the broken material: bare brick without patina, concrete with exposed aggregate, fresh wood. Shown in the damaged area and on rims when `DamagedMapAmount` > 0 |
 | `DamagedNormalMap` | **optional.** The normal map for `DamagedColorMap`, Compression = Normalmap, so the relief changes too |
+| `InteriorColorMap` | **optional.** A texture of the inside of the wall, usually darker than `DamagedColorMap`. Shows on hole rims and where the wall is eaten past `InteriorDepth`, when `InteriorAmount` is above 0 |
 
 !!! success "Check"
     On an **intact** wall the instance must look exactly like your old material.
@@ -144,6 +145,8 @@ A dent is coloured as one patch, and the patch's edge is:
 | `AreaSoftness` | 1.5 | edge width in pixels: 1 is sharpest, 3–4 softer. Below 1 it may shimmer far away |
 | `DamagedMapAmount` | 0 | 0: the patch and rims use the face texture, tinted. 1: they show the broken material (`DamagedColorMap`, `DamagedNormalMap`, `DamagedRoughness`). The demo instances use 1 |
 | `DamagedRoughness` | 0.95 | roughness of the broken material |
+| `InteriorAmount` | 0 | 0: off. 1: `InteriorColorMap` inside craters and on rims. The concrete demo instance uses 1 |
+| `InteriorDepth` | 0.3 | share of the thickness eaten before the inside shows (0.3 is 6 cm of 20). Lower widens the dark area |
 
 **Rims** (caps and opening reveals) look exactly like the face material on an
 intact wall. The broken material appears on a rim only as it is damaged: at the

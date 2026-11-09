@@ -366,6 +366,45 @@ On the wall's **GridCollapseVisual** component, not on the preset.
 The first two are clamped to a safe range when read. A wall carrying an
 out-of-range value says so once at BeginPlay in a `HANGRISK` line.
 
+## Table 4: rebar
+
+On the preset, section **Wall | Rebar**.
+
+| preset field | ships at | what it does |
+|---|---|---|
+| `bRebar` | off (on in `GP_Concrete`) | the wall has steel in it |
+| `RebarCutBy` | `Cutting` | `Cutting`: damage marked **Cuts Rebar** removes it. `None`: indestructible bars. A collapse takes the steel of what fell either way |
+| `RebarLayout` | `Mats` | `Mats`: one mesh of straight bars behind each face, for a wall or slab. `Cage`: perimeter bars and closed stirrups, for a column |
+| `RebarSpacingCm` | 20, 20 | between bars: X along the wall, Y up it. In centimetres from the wall's edge, so cell density never moves a bar |
+| `RebarCoverCm` | 4 | concrete over the steel. 0 lays a single mesh in the middle |
+| `RebarDiameterCm` | 1.2 | the bar's real thickness; stirrups bend no tighter than four of these |
+| `RebarVisualScale` | 1.4 | drawn this much thicker, so a bar reads at a distance. The collider ignores it |
+| `RebarWobbleCm` | 0.8 | how far a bar strays from its line. Kept inside the cover, so no bar pokes out of an intact face |
+| `RebarCornerRadiusCm` | 0 | `Cage` only: the section's corner radius, which the stirrups follow less the cover |
+| `RebarStubMaxCm` | 12 | the longest end left sticking out at a cut (and always under half a cell) |
+| `RebarMesh` | `SM_Grid_Rebar_20` in `GP_Concrete` | one piece of bar at real size, along Z, centred. A bar is laid as pieces of this length, so ribs never stretch. Empty: the engine cylinder |
+| `RebarMaterial` | empty | overrides the mesh's own material |
+
+**What a player sees.** Bars appear where the concrete no longer hides them: in holes, and in
+craters and chipped sides deeper than the cover. They stay only while steel joins them to standing concrete, so
+nothing hangs in the air.
+
+**What it does in play.** A grate of bars stops a player and lets bullets, cameras and physics bodies through.
+Damage marked **Cuts Rebar** removes the steel it touches and leaves short ends at the edge of the cut; a repair
+that rebuilds a cell gives its steel back. In the sample, the cutter and the breaching charge cut; the rifle and
+the grenade do not.
+
+**Network.** The bars cost nothing on the wire: one bit in the cell's flags byte, which already replicates, and every
+machine lays out the same steel from the same cells. A dedicated server draws no bars but keeps the grate, because
+movement is checked there.
+
+Rebar fields are read when the wall begins play, so **Apply Preset** is not needed after editing them.
+`GP_Concrete_Column` is a ready example of `Cage`: 120 cm thick, 20 cm corner radius.
+
+To make a weapon or a device cut it, see [Cutting rebar](integration.md#cutting-rebar).
+
+---
+
 ## Where each knob lives
 
 | knob | lives on | survives Apply Preset? |

@@ -1,5 +1,27 @@
 # Changelog
 
+## 1.1.0
+
+**Rebar**
+
+- Concrete can carry steel. Bars show in holes, in craters deeper than the cover and in chipped sides, and stay
+  only while steel joins them to standing concrete.
+- A grate of bars stops players and lets bullets through, on every machine including a dedicated server.
+- Damage marked **Cuts Rebar** removes it and leaves short ends at the cut; a collapse takes the steel of what fell.
+  In the sample the cutter and the breaching charge cut.
+- Wall mats and column cages with rounded stirrups, a sample ribbed bar, and a new preset `GP_Concrete_Column`.
+- One bit per cell in a byte that already replicates: no extra bandwidth.
+- **Line Trace For Rebar Cut**, for weapons that have to hit the grate.
+
+**Damage material**
+
+- `InteriorColorMap`, `InteriorAmount` and `InteriorDepth`: the inside of a wall can have its own, darker texture.
+  Off by default; on in the concrete demo instance.
+
+!!! warning "After updating from 1.0.0"
+    Walls using `GP_Concrete` now have rebar, and a hole through them blocks players until it is cut. To keep the old
+    behaviour, untick `bRebar` on the preset.
+
 ## 1.0.0
 
 First release, for Unreal Engine 5.7 and 5.8 on Win64.
