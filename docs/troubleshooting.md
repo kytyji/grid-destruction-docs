@@ -57,6 +57,8 @@ after BeginPlay.
 | Effect count keeps growing | A system that never finishes; see [Effects → performance](effects.md#performance-rules). |
 | Frame time is bad on walls nobody shot | The debug lattice is on (`bShowDebugCellsInGame` on GridVisual). It is off by default. |
 | Bots do not path through holes | Set the navmesh's Runtime Generation to **Dynamic** ([Setup](setup.md#ai-navigation)). |
+| Hitches when a large building collapses | With a Dynamic navmesh, tick **Do Fully Async Nav Data Gathering** ([Setup](setup.md#ai-navigation)). `grid.Rubble.FrameBudgetMs` caps the milliseconds a frame spends showing what fell. |
+| A `HANGCHECK` warning in the log | A piece was left standing with no support. Send the line and, if you can, the wall's damage snapshot. |
 
 ## Slivers on a hole's rim
 

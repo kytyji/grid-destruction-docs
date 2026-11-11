@@ -1,5 +1,34 @@
 # Changelog
 
+## 1.2.0
+
+**Collapses**
+
+- A building that loses its support comes down from the break outward over a few frames instead of in one long
+  frame. The hole, its rubble and the wall's collision appear together, so what is seen is what blocks.
+- Rubble no longer starts inside the collider of the wall it fell from, and a wall that falls whole drops its
+  collision at once.
+- Rubble, wall meshes and rebar are built on worker threads. On a test level with multi-storey buildings, frames
+  over 100 ms during collapses fell from 114 to 42.
+- A background check, after a structure settles, that no piece is left standing in the air. It only reports: a
+  `HANGCHECK` warning in the log names the wall.
+- New console variables: `grid.Rubble.FrameBudgetMs` (8, milliseconds a frame for showing what fell),
+  `grid.Rubble.ParallelWalls` (4), `grid.Mesh.ParallelBuild` (1), `grid.HangCheck` (1).
+
+**Fixes**
+
+- Falling rubble keeps the damage paint of the wall it came from.
+- Rebar falls with concrete that collapses after being hit; bars no longer stay in the air.
+- Rubble no longer makes the navmesh rebuild while it flies.
+
+!!! tip "Dynamic navmesh"
+    With **Runtime Generation = Dynamic**, also tick **Do Fully Async Nav Data Gathering** on your RecastNavMesh
+    (see [Setup → AI navigation](setup.md#ai-navigation)). Without it the engine gathers the colliders of collapsing
+    walls on the game thread.
+
+!!! note "After updating from 1.1.0"
+    Rebar now appears a frame or two after the concrete around it changes.
+
 ## 1.1.0
 
 **Rebar**

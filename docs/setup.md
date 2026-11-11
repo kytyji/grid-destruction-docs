@@ -327,6 +327,19 @@ collider every time a hole opens or closes (never on a dent), and the engine
 rebuilds the tiles under it in the background. With the default **Static**
 navmesh the walls are still obstacles, but a hole is never walkable.
 
+With a Dynamic navmesh, also tick **Do Fully Async Nav Data Gathering** on the
+level's **RecastNavMesh** actor (Details → Generation, advanced), or set it for
+the project in `DefaultEngine.ini`:
+
+```ini
+[/Script/NavigationSystem.RecastNavMesh]
+RuntimeGeneration=Dynamic
+bDoFullyAsyncNavDataGathering=True
+```
+
+Otherwise the engine reads the colliders of every collapsing wall on the game
+thread, which shows as hitches when a large building comes down.
+
 ## Pre-damaged walls and saved damage (beta)
 
 !!! note "Beta"
